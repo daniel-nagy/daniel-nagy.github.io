@@ -1,0 +1,10 @@
+# hidden files
+.DS_Store
+
+# generated files
+app/styles/style.css
+
+# folders
+bower_components
+node_modules
+production

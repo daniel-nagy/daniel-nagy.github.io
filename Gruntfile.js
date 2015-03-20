@@ -68,17 +68,20 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: 'bower_components/angular/angular.min.js',
+          cwd: 'bower_components/angular/',
+          src: ['angular.min.js', 'angular.min.js.map'],
           dest: 'production/angular'
         }, {
           expand: true,
           flatten: true,
-          src: 'bower_components/angular-animate/angular-animate.min.js',
+          cwd: 'bower_components/angular-animate/',
+          src: ['angular-animate.min.js', 'angular-animate.min.js.map'],
           dest: 'production/angular'
         }, {
           expand: true,
           flatten: true,
-          src: 'bower_components/angular-route/angular-route.min.js',
+          cwd: 'bower_components/angular-route/',
+          src: ['angular-route.min.js', 'angular-route.min.js.map'],
           dest: 'production/angular'
         }]
       }

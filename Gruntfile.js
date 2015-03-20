@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       livereload: 35729
     },
     
-    // import metadata from in package.json
+    // import metadata from package.json
     pkg: grunt.file.readJSON('package.json'),
     
     // add vender prefixes to style sheets

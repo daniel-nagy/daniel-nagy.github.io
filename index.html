@@ -12,14 +12,17 @@
     
   </head>
   
-  <body>
+  <body layout="row">
     
-    <toolbar>
-      <icon src="icons/menu.svg"></icon>
-      <div class="title">About Me</div>
-    </toolbar>
+    <drawer id="left" lock-open="screen-md" ng-include="'templates/left-drawer.html'" ng-show="show()"></drawer>
     
-    <h2 style="padding: 40px;">Partaking in the festivities I shall return. Check back soon!</h2>
+    <flex grow="1" shrink="1" layout="column">
+      
+      <toolbar ng-include="'templates/toolbar.html'" ng-controller="ToolbarCtrl"></toolbar>
+      
+      <h2 style="padding: 40px;">Partaking in the festivities I shall return. Check back soon!</h2>
+      
+    </flex>
     
     <script type="text/javascript" src="angular/angular.min.js"></script>
     <script type="text/javascript" src="angular/angular-animate.min.js"></script>

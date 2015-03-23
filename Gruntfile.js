@@ -59,7 +59,7 @@ module.exports = function(grunt) {
       }
     },
     
-    // copy bower components
+    // copy bower components and templates
     copy: {
       production: {
         files: [{
@@ -80,6 +80,12 @@ module.exports = function(grunt) {
           cwd: 'bower_components/angular-route/',
           src: ['angular-route.min.js', 'angular-route.min.js.map'],
           dest: 'production/angular'
+        }, {
+          expand: true,
+          flatten: true,
+          cwd: 'app/templates/',
+          src: ['*.html'],
+          dest: 'production/templates/'
         }]
       }
     },

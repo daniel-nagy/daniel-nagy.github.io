@@ -1,9 +1,3 @@
-// components
-@import "components/toolbar";
-// mixins
-@import "mixins/elevation";
-@import "mixins/media-queries";
-
 // color palet
 @lighter : #B3E5FC;
 @light   : #4FC3F7;
@@ -11,14 +5,49 @@
 @dark    : #0288D1;
 @darker  : #01579B;
 
-body {
-  margin: 0;
-  font-family: RobotoDraft, Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizelegibility;
+// gray scale
+@divider: rgba(0, 0, 0, 0.12);
+@disabled: rgba(0, 0, 0, 0.26);
+@secondary-text: rgba(0, 0, 0, 0.54);
+@text: rgba(0, 0, 0, 0.87);
+
+// media sizes
+@screen-sm: 600px;
+@screen-md: 960px;
+@screen-lg: 1200px;
+
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+    margin: 0;
+    font-family: RobotoDraft, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizelegibility;
+    color: @text;
+  }
 }
 
-svg.icon {
-  padding: 12px;
+icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  height: 48px;
+  width: 48px;
 }
+
+@import "layout";
+@import "responsive";
+@import "backdrop";
+
+// components
+@import "components/button";
+@import "components/drawer";
+@import "components/toolbar";
+
+// mixins
+@import "mixins/elevation";
+@import "mixins/media-queries";

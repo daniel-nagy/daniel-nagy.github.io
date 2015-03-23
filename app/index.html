@@ -14,14 +14,17 @@
     
   </head>
   
-  <body>
+  <body layout="row">
     
-    <toolbar>
-      <icon src="icons/menu.svg"></icon>
-      <div class="title">About Me</div>
-    </toolbar>
+    <drawer id="left" lock-open="screen-md" ng-include="'templates/left-drawer.html'" ng-show="show()"></drawer>
     
-    <h2 style="padding: 40px;">Partaking in the festivities I shall return. Check back soon!</h2>
+    <flex grow="1" shrink="1" layout="column">
+      
+      <toolbar ng-include="'templates/toolbar.html'" ng-controller="ToolbarCtrl"></toolbar>
+      
+      <h2 style="padding: 40px;">Partaking in the festivities I shall return. Check back soon!</h2>
+      
+    </flex>
     
     <!-- production:[src] angular/ -->
     <script type="text/javascript" src="angular/angular.min.js"></script>
@@ -31,8 +34,11 @@
     
     <!-- production:js app.min.js -->
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="scripts/controllers/ToolbarCtrl.js"></script>
+    <script type="text/javascript" src="scripts/directives/drawer.js"></script>
     <script type="text/javascript" src="scripts/directives/flex.js"></script>
     <script type="text/javascript" src="scripts/directives/icon.js"></script>
+    <script type="text/javascript" src="scripts/services/drawer.js"></script>
     <!-- /production -->
     
   </body>

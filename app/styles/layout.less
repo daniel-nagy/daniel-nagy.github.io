@@ -1,0 +1,46 @@
+@justify-content: flex-start, flex-end, center, space-around, space-between;
+@align-content: flex-start, flex-end, center, stretch, space-around, space-between;
+@align-itmes: flex-start, flex-end, center, stretch, baseline;
+
+[layout] {
+  display: flex;
+}
+
+[layout="row-reverse"] {
+  flex-direction: row-reverse;
+}
+
+[layout="column"] {
+  flex-direction: column;
+}
+
+[layout="column-reverse"] {
+  flex-direction: column-reverse;
+}
+
+[wrap] {
+  flex-wrap: wrap;
+}
+
+[wrap-reverse] {
+  flex-wrap: wrap-reverse;
+}
+
+.createAttribute(@attribute; @count; @values; ...) when (@count > 0) {
+  @value: extract(@values, @count);
+
+  [@{attribute}="@{value}"] {
+    @{attribute}: @value;
+  }
+  
+  .createAttribute(@attribute; (@count - 1); @values);
+}
+
+// aligns the flexible container's items on the main axis
+.createAttribute(justify-content; length(@justify-content); @justify-content);
+
+// aligns the flexible container's items on the cross axis
+.createAttribute(align-content; length(@align-content); @align-content);
+
+// specifies the default alignment for items inside the flexible container
+.createAttribute(align-items; length(@align-itmes); @align-itmes);

@@ -1,19 +1,29 @@
 'use strict';
 
-angular.module('me').factory('$drawer', function () {
+angular.module('me').factory('$drawer', ['$q', function ($q) {
   
   var drawers = {};
+  var promises = {};
   
   return {
     
-    toggle: function(id) {
-      drawers[id].toggle();
+    get: function (id) {
+      
+      promises[id] = $q.defer();
+      
+      if(drawers.hasOwnProperty(id)) {
+        promises[id].resolve(drawers[i]);
+      }
+      
+      return promises[id].promise;
     },
     
-    register: function(id, toggle) {
-      drawers[id] = {
-        'toggle': toggle
-      };
+    register: function (id, instance) {
+      drawers[id] = instance;
+      
+      if(promises.hasOwnProperty(id)) {
+        promises[id].resolve(drawers[id]);
+      }
     }
   };
-});
+}]);

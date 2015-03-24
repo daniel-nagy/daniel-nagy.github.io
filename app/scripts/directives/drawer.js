@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('me').directive('drawer', ['$animate', '$drawer', '$media', function ($animate, $drawer, $media) {
+angular.module('me').directive('drawer', ['$backdrop', '$drawer', '$media', function ($backdrop, $drawer, $media) {
   return {
     link: function (scope, element, attrs) {
       
@@ -18,26 +18,28 @@ angular.module('me').directive('drawer', ['$animate', '$drawer', '$media', funct
         return  mediaQuery.matches || show;
       };
       
-      function open() {
-        show = true;
-        
-        $animate.enter('<backdrop></backdrop>', null, element).then(function () {
-          element.next().on('click', close);
-        });
-      }
-      
       function close() {
         scope.$apply(function () {
           show = false;
-          $animate.leave(element.next());
+          $backdrop.leave();
         });
       }
       
-      function toggle() {
-        if(scope.open) { close(); } else { open(); }
+      function open() {
+        show = true;
+        $backdrop.enter();
+        $backdrop.one('click', close);
       }
       
-      $drawer.register(element.prop('id'), toggle);
+      function toggle() {
+        if (show) { close(); } else { open(); }
+      }
+      
+      $drawer.register(element.prop('id'), {
+        'close': close,
+        'open': open,
+        'toggle': toggle
+      });
     }
   };
 }]);

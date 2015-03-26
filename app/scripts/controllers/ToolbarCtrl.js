@@ -2,14 +2,23 @@
 
 angular.module('me').controller('ToolbarCtrl', ['$drawer', '$scope', function ($drawer, $scope) {
   
-  var drawer;
+  var leftDrawer;
+  var rightDrawer;
   
   $drawer.get('left').then(function(result) {
-    drawer = result;
+    leftDrawer = result;
   });
   
-  $scope.toggleDrawer = function () {
-    drawer.toggle();
+  $drawer.get('right').then(function(result) {
+    rightDrawer = result;
+  });
+  
+  $scope.toggleLeftDrawer = function () {
+    leftDrawer.toggle();
+  };
+  
+  $scope.toggleRightDrawer = function () {
+    rightDrawer.toggle();
   };
   
 }]);

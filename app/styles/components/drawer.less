@@ -1,5 +1,6 @@
 drawer {
   position: absolute;
+  top: 0; bottom: 0;
   min-height: 100%;
   min-width: 264px;
   background-color: #fff;
@@ -9,5 +10,13 @@ drawer {
     position: static;
   }
   
-  transition: margin-left 0.35s;
+  &#left {
+    left: 0;
+    transition: margin-left 0.35s;
+  }
+  
+  &#right {
+    right: 0;
+    transition: margin-right 0.35s;
+  }
 }

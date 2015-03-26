@@ -4,6 +4,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
   return {
     link: function (scope, element, attrs) {
       var parent = element.parent();
+      var sibling = element.previous();
       var open = false;
       var locked = false;
       
@@ -19,7 +20,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
         element.addClass('locked');
         
         if(!open) {
-          $animate.enter(element, parent).finally(scope.$apply());
+          $animate.enter(element, parent, sibling).finally(scope.$apply());
         }
         
         else {
@@ -68,7 +69,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
           return;
         }
         
-        $q.all($animate.enter(element, parent), $backdrop.enter()).then(function () {
+        $q.all($animate.enter(element, parent, sibling), $backdrop.enter()).then(function () {
           $backdrop.on('click', closeDrawer);
           open = true;
         });
@@ -117,25 +118,18 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
 .animation('.drawer', ['$animate', function ($animate) {
   return {
     enter: function (element, done) {
-      
-      var before = {
-        'margin-left': '-' + element.prop('clientWidth') + 'px'
-      };
-      
-      var after = {
-        'margin-left': '0'
-      };
-      
-      $animate.animate(element, before, after).then(done);
+      if(element.prop('id') === 'left') {
+        $animate.animate(element, {'margin-left': '-' + element.prop('clientWidth') + 'px'}, {'margin-left': '0'}).then(done);
+      } else {
+        $animate.animate(element, {'margin-right': '-' + element.prop('clientWidth') + 'px'}, {'margin-right': '0'}).then(done);
+      }
     },
-    
     leave: function (element, done) {
-      
-      var after = {
-        'margin-left': '-' + element.prop('clientWidth') + 'px'
-      };
-      
-      $animate.animate(element, {}, after).then(done);
+      if(element.prop('id') === 'left') {
+        $animate.animate(element, {}, {'margin-left': '-' + element.prop('clientWidth') + 'px'}).then(done);
+      } else {
+        $animate.animate(element, {}, {'margin-right': '-' + element.prop('clientWidth') + 'px'}).then(done);
+      }
     }
   };
 }]);

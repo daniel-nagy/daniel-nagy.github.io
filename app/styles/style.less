@@ -21,6 +21,7 @@ html {
 
   body {
     height: 100%;
+    overflow-x: hidden;
     margin: 0;
     font-family: RobotoDraft, Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -30,15 +31,6 @@ html {
   }
 }
 
-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  height: 48px;
-  width: 48px;
-}
-
 @import "layout";
 @import "responsive";
 @import "backdrop";
@@ -46,6 +38,8 @@ icon {
 // components
 @import "components/button";
 @import "components/drawer";
+@import "components/icon";
+@import "components/ink";
 @import "components/toolbar";
 
 // mixins

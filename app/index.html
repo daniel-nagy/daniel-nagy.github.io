@@ -16,7 +16,7 @@
   
   <body layout="row">
     
-    <drawer id="left" lock-open="screen-md" ng-include="'templates/left-drawer.html'"></drawer>
+    <drawer id="left" lock-open="screen-lg" ng-include="'templates/left-drawer.html'"></drawer>
     
     <flex grow="1" shrink="1" layout="column">
       
@@ -25,6 +25,8 @@
       <h2 style="padding: 40px;">Partaking in the festivities I shall return. Check back soon!</h2>
       
     </flex>
+    
+    <drawer flex id="right" lock-open="screen-md"></drawer>
     
     <!-- production:[src] angular/ -->
     <script type="text/javascript" src="angular/angular.min.js"></script>
@@ -38,6 +40,7 @@
     <script type="text/javascript" src="scripts/directives/drawer.js"></script>
     <script type="text/javascript" src="scripts/directives/flex.js"></script>
     <script type="text/javascript" src="scripts/directives/icon.js"></script>
+    <script type="text/javascript" src="scripts/directives/ripple.js"></script>
     <script type="text/javascript" src="scripts/services/backdrop.js"></script>
     <script type="text/javascript" src="scripts/services/drawer.js"></script>
     <!-- /production -->

@@ -1,8 +1,8 @@
 <flex grow="1" layout="row" justify-content="flex-start" align-items="center">
-  <button hide-gt-md class="icon" ng-click="toggleDrawer()">
-    <icon src="icons/menu.svg"></icon>
-  </button>
+  <button ripple icon src="icons/menu.svg" hide-gt-lg ng-click="toggleLeftDrawer()"></button>
   <div class="title">About Me</div>
 </flex>
 
-<flex grow="1" layout="row" justify-content="flex-end" align-items="center"></flex>
+<flex grow="1" layout="row" justify-content="flex-end" align-items="center">
+  <button ripple icon src="icons/more-vertical.svg" hide-gt-md ng-click="toggleRightDrawer()"></button>
+</flex>

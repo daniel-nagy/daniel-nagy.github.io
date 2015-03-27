@@ -9,7 +9,13 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
 })
 
 .run(function () {
+  
   angular.element.prototype.previous = function () {
     return angular.element(this.prop('previousSibling'));
   }
+  
+  Array.prototype.first = function () {
+    return this[0];
+  };
+  
 });

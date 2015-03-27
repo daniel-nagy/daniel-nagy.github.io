@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('me').controller('ToolbarCtrl', ['$drawer', '$scope', function ($drawer, $scope) {
+angular.module('me').controller('ToolbarController', ['$drawer', '$scope', function ($drawer, $scope) {
   
   var leftDrawer;
   var rightDrawer;

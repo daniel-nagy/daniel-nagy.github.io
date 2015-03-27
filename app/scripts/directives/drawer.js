@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$media', '$q', function ($animate, $backdrop, $drawer, $media, $q) {
+angular.module('me').directive('drawer', ['$animate', '$backdrop', '$compile', '$drawer', '$media', '$q',
+function ($animate, $backdrop, $compile, $drawer, $media, $q) {
   return {
     link: function (scope, element, attrs) {
       var parent = element.parent();
       var sibling = element.previous();
+      
       var open = false;
       var locked = false;
       
@@ -20,6 +22,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
         element.addClass('locked');
         
         if(!open) {
+          $compile(element.children())(scope);
           $animate.enter(element, parent, sibling).finally(scope.$apply());
         }
         
@@ -69,6 +72,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
           return;
         }
         
+        $compile(element.children())(scope);
         $q.all($animate.enter(element, parent, sibling), $backdrop.enter()).then(function () {
           $backdrop.on('click', closeDrawer);
           open = true;

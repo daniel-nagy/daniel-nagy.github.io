@@ -5,7 +5,7 @@ angular.module('me').controller('LeftDrawerController', ['$scope', function ($sc
   $scope.menu = [{
     active: true,
     href: '#me',
-    icon: 'person',
+    icon: 'icons/person.svg',
     text: 'About Me',
   }];
   

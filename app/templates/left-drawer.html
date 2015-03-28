@@ -7,7 +7,7 @@
 
 <list>
   <a item ink-color="#B3E5FC" ng-repeat="item in menu" ng-class="{active: item.active}" ng-href="{{item.href}}">
-    <icon src="icons/person.svg"></icon>
+    <icon src="{{item.icon}}"></icon>
     <content>
       <div>{{item.text}}</div>
     </content>

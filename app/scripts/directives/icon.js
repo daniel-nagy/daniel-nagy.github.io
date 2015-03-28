@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('me').directive('icon', function () {
+angular.module('me').directive('icon', ['$http', '$interpolate', '$templateCache', function ($http, $interpolate, $templateCache) {
   return {
-    templateUrl: function (element, attrs) {
-      if(attrs.src) {
-        return attrs.src;
-      }
+    link: function(scope, element, attrs) {
+      
+      var url = $interpolate(attrs.src)(scope);
+      
+      $http.get(url, {cache: $templateCache}).success(function (template) {
+        element.append(template);
+      });
     }
   };
-});
+}]);

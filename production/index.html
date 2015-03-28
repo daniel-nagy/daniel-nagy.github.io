@@ -14,17 +14,14 @@
   
   <body layout="row">
     
-    <drawer id="left" lock-open="screen-lg" ng-include="'templates/left-drawer.html'"></drawer>
+    <drawer id="left" ng-include="'templates/left-drawer.html'" ng-cloak></drawer>
     
     <flex grow="1" shrink="1" layout="column">
-      
-      <toolbar ng-include="'templates/toolbar.html'" ng-controller="ToolbarCtrl"></toolbar>
-      
+      <toolbar ng-include="'templates/toolbar.html'" ng-controller="ToolbarController"></toolbar>
       <h2 style="padding: 40px;">Partaking in the festivities I shall return. Check back soon!</h2>
-      
     </flex>
     
-    <drawer flex id="right" lock-open="screen-md"></drawer>
+    <drawer id="right" lock-open="screen-lg" ng-include="'templates/right-drawer.html'" ng-cloak></drawer>
     
     <script type="text/javascript" src="angular/angular.min.js"></script>
     <script type="text/javascript" src="angular/angular-animate.min.js"></script>

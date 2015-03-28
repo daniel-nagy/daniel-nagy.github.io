@@ -82,7 +82,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
         }
         
         $q.all([animateClose(), $backdrop.leave()]).then(function () {
-          element.detach()
+          element.detach();
           $backdrop.off('click');
           open = false;
         }).finally(scope.$apply());

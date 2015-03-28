@@ -86,6 +86,12 @@ module.exports = function(grunt) {
           cwd: 'app/templates/',
           src: ['*.html'],
           dest: 'production/templates/'
+        },{
+          expand: true,
+          flatten: true,
+          cwd: 'app/images/',
+          src: ['*.png'],
+          dest: 'production/images/'
         }]
       }
     },

@@ -10,6 +10,10 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
 
 .run(function () {
   
+  angular.element.prototype.first = function () {
+    return this[0];
+  }
+  
   angular.element.prototype.previous = function () {
     return angular.element(this.prop('previousSibling'));
   }

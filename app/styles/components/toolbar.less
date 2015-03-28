@@ -14,8 +14,10 @@ toolbar {
     font-size: 20px;
   }
   
-  icon > svg *, [icon] > svg * {
-    fill: #fff;
+  icon, [icon] {
+    > svg * {
+      fill: #fff;
+    }
   }
   
   .min-width(@screen-sm, {

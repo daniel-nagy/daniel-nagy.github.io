@@ -10,7 +10,9 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
       
       var style = window.getComputedStyle(element[0]);
       
-      element.on('click', function (event) {
+      var eventName = element.first().hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
+      
+      element.on(eventName, function (event) {
         var ink = angular.element('<ink></ink>');
         var diameter = Math.max(element.prop('clientHeight'), element.prop('clientWidth'));
         
@@ -26,6 +28,24 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
           ink.remove();
         }).finally(scope.$apply());
       });
+    }
+  };
+}])
+
+.directive('button', ['rippleDirective', function (rippleDirective) {
+  var ripple = rippleDirective.first();
+  return {
+    link: function () {
+      ripple.link.apply(ripple, arguments);
+    }
+  };
+}])
+
+.directive('a', ['rippleDirective', function (rippleDirective) {
+  var ripple = rippleDirective.first();
+  return {
+    link: function () {
+      ripple.link.apply(ripple, arguments);
     }
   };
 }]);

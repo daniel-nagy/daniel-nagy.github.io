@@ -23,11 +23,18 @@ html {
     height: 100%;
     overflow-x: hidden;
     margin: 0;
-    font-family: RobotoDraft, Roboto, sans-serif;
+    color: @text;
+    font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizelegibility;
-    color: @text;
+    
+    a {
+      color: @text;
+      text-decoration: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
   }
 }
 
@@ -41,6 +48,7 @@ html {
 @import "components/drawer";
 @import "components/icon";
 @import "components/ink";
+@import "components/list";
 @import "components/toolbar";
 
 // mixins

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('me').controller('ToolbarController', ['$drawer', '$scope', function ($drawer, $scope) {
+angular.module('me').controller('ToolbarController', ['$drawer', '$scope', '$timeout', function ($drawer, $scope, $timeout) {
   
   var leftDrawer;
   var rightDrawer;
@@ -14,11 +14,11 @@ angular.module('me').controller('ToolbarController', ['$drawer', '$scope', funct
   });
   
   $scope.toggleLeftDrawer = function () {
-    leftDrawer.toggle();
+    $timeout(leftDrawer.toggle, 300);
   };
   
   $scope.toggleRightDrawer = function () {
-    rightDrawer.toggle();
+    $timeout(rightDrawer.toggle, 300);
   };
   
 }]);

@@ -8,19 +8,19 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
         'overflow': 'hidden'
       });
       
-      var style = window.getComputedStyle(element[0]);
-      
+      var style = window.getComputedStyle(element.first());
       var eventName = element.first().hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
       
       element.on(eventName, function (event) {
         var ink = angular.element('<ink></ink>');
-        var diameter = Math.max(element.prop('clientHeight'), element.prop('clientWidth'));
+        var rect = element.first().getBoundingClientRect();
+        var diameter = Math.max(rect.height, rect.width);
         
         ink.css({
           'height': diameter + 'px',
           'width': diameter + 'px',
-          'top': event.pageY - element.prop('offsetTop') - (diameter / 2) + 'px',
-          'left': event.pageX - element.prop('offsetLeft') - (diameter / 2) + 'px',
+          'top': event.pageY - rect.top - (diameter / 2) + 'px',
+          'left': event.pageX - rect.left - (diameter / 2) + 'px',
           'background-color': attrs.inkColor || style.color
         });
         

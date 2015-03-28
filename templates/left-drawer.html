@@ -6,10 +6,10 @@
 </toolbar>
 
 <list>
-  <a item ink-color="#B3E5FC" ng-class="{active: true}" href="">
+  <a item ink-color="#B3E5FC" ng-repeat="item in menu" ng-class="{active: item.active}" ng-href="{{item.href}}">
     <icon src="icons/person.svg"></icon>
     <content>
-      <div>About Me</div>
+      <div>{{item.text}}</div>
     </content>
   </a>
 </list>

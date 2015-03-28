@@ -1,11 +1,7 @@
 list {
   display: flex;
   flex-direction: column;
-  
-  & + & {
-    border-top: 1px @divider solid;
-  }
-  
+    
   .title {
     padding: 16px;
     font-size: 14px;
@@ -66,12 +62,18 @@ list {
       margin-left: 72px;
     }
     
-    > item > content:only-child {
-      margin-left: 56px;
+    > item, [item] {
+      > content:only-child {
+        margin-left: 56px;
+      }
     }
   }
   
   &[divide] > item:not(:last-child) > content {
     border-bottom: 1px @divider solid;
+  }
+  
+  &[seperate] + & {
+    border-top: 1px @divider solid;
   }
 }

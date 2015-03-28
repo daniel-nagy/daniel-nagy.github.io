@@ -2,6 +2,16 @@
 
 angular.module('me', ['ngAnimate', 'ngRoute'])
 
+.config(['$routeProvider', function ($routeProvider) {
+  
+  $routeProvider.when('/me', {
+    templateUrl: 'templates/me.html'
+  }).otherwise({
+    redirectTo  : '/me'
+  });
+  
+}])
+
 .value("$media", {
   'screen-sm': '600px',
   'screen-md': '960px',

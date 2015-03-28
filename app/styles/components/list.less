@@ -1,0 +1,77 @@
+list {
+  display: flex;
+  flex-direction: column;
+  
+  & + & {
+    border-top: 1px @divider solid;
+  }
+  
+  .title {
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: @secondary-text;
+  }
+  
+  divider {
+    height: 1px;
+    flex: 1 1 auto;
+    background-color: @divider;
+  }
+  
+  item, [item] {
+    display: flex;
+    flex-direction: row;
+    
+    margin: 0;
+    padding: 0;
+    
+    icon, [icon] {
+      margin-right: 8px;
+      
+      > svg * {
+        fill: @secondary-text;
+      }
+    }
+    
+    content {
+      flex: 1 0 auto;
+      
+      text-align: left;
+      padding: 15px 16px;
+      
+      > * + * {
+        margin-top: 4px;
+        font-size: 14px;
+      }
+      
+      > *:last-child:not(:only-child) {
+        color: @secondary-text;
+      }
+    }
+    
+    &.active {
+      color: @primary;
+      
+      icon, [icon] {
+        > svg * {
+          fill: @primary;
+        }
+      }
+    }
+  }
+  
+  &[icon-list] {
+    > divider {
+      margin-left: 72px;
+    }
+    
+    > item > content:only-child {
+      margin-left: 56px;
+    }
+  }
+  
+  &[divide] > item:not(:last-child) > content {
+    border-bottom: 1px @divider solid;
+  }
+}

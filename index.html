@@ -17,11 +17,11 @@
     <drawer id="left" ng-include="'templates/left-drawer.html'" ng-controller="LeftDrawerController" ng-cloak></drawer>
     
     <flex grow="1" shrink="1" layout="column">
-      <toolbar ng-include="'templates/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
+      <toolbar primary ng-include="'templates/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
       <ng-view></ng-view>
     </flex>
     
-    <drawer id="right" lock-open="screen-lg" ng-include="'templates/right-drawer.html'" ng-cloak></drawer>
+    <drawer id="right" full lock-open="screen-lg" ng-include="'templates/right-drawer.html'" ng-controller="RightDrawerController" ng-cloak></drawer>
     
     <script type="text/javascript" src="angular/angular.min.js"></script>
     <script type="text/javascript" src="angular/angular-animate.min.js"></script>

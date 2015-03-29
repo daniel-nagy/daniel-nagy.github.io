@@ -2,22 +2,48 @@ drawer {
   position: absolute;
   overflow-y: scroll;
   top: 0; bottom: 0;
-  min-height: 100%;
-  min-width: 264px;
   background-color: #fff;
+  transition-duration: 0.35s;
   .elevate(2);
-  
-  &.locked {
-    position: static;
-  }
   
   &#left {
     left: 0;
-    transition: margin-left 0.35s;
+    
+    &[full] {
+      transition-property: margin-left, min-width;
+    }
+    
+    &:not([full]) {
+      transition-property: margin-left;
+    }
   }
   
   &#right {
     right: 0;
-    transition: margin-right 0.35s;
+    
+    &[full] {
+      transition-property: margin-right, min-width;
+    }
+    
+    &:not([full]) {
+      transition-property: margin-right;
+    }
+  }
+  
+  &[full] {
+    min-width: 320px;
+    
+    .max-width(@screen-sm, {
+      min-width: 100%;
+    });
+  }
+  
+  &:not([full]) {
+    min-width: 264px;
+    max-width: 264px;
+  }
+  
+  &.locked {
+    position: static;
   }
 }

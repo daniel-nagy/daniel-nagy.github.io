@@ -4,20 +4,22 @@ toolbar {
   
   min-height: 56px;
   padding: 0 4px;
-  color: #fff;
-  background-color: @primary;
-  
   .elevate();
+  
+  &[primary] {
+    color: #fff;
+    background-color: @primary;
+    
+    icon, [icon] {
+      > svg * {
+        fill: #fff;
+      }
+    }
+  }
   
   .title {
     margin-left: 20px;
     font-size: 20px;
-  }
-  
-  icon, [icon] {
-    > svg * {
-      fill: #fff;
-    }
   }
   
   .min-width(@screen-sm, {

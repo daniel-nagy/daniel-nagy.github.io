@@ -22,11 +22,11 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
   
   angular.element.prototype.first = function () {
     return this[0];
-  }
+  };
   
   angular.element.prototype.previous = function () {
     return angular.element(this.prop('previousSibling'));
-  }
+  };
   
   Array.prototype.first = function () {
     return this[0];

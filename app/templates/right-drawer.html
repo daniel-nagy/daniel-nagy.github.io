@@ -1,21 +1,23 @@
-<list icon-list seperate>
-  <div class="title">Contact Information</div>
-  <item>
+<toolbar hide-gt-sm>
+  <button icon src="icons/backwards.svg" ng-click="closeDrawer()"></button>
+</toolbar>
+
+<list icon-list separate>
+  <div class="title">Contact</div>
+  <item separate>
     <icon src="icons/place.svg"></icon>
     <content>
       <div>Ohio University</div>
-      <div>Athens, Ohio</div>
+      <div>Athens Ohio</div>
     </content>
   </item>
-  <divider></divider>
-  <item>
+  <item separate>
     <icon src="icons/phone.svg"></icon>
     <content>
       <div>(419) 602-1585</div>
       <div>Mobile</div>
     </content>
   </item>
-  <divider></divider>
   <item>
     <icon src="icons/mail.svg"></icon>
     <content>
@@ -23,7 +25,7 @@
       <div>Personal</div>
     </content>
   </item>
-  <item>
+  <item separate>
     <content>
       <div>dn686910@ohio.edu</div>
       <div>School</div>
@@ -31,29 +33,27 @@
   </item>
 </list>
 
-<list icon-list>
-  <div class="title">Other Profiles</div>
-  <a item ink-color="#B3E5FC" href="https://github.com/daniel-nagy" target="_blank">
+<list icon-list separate>
+  <div class="title">Profiles</div>
+  <a ink-color="#B3E5FC" item separate ng-href="https://github.com/daniel-nagy" target="_blank">
     <icon src="icons/branch.svg"></icon>
     <content>
       <div>GitHub</div>
       <div>Social Coding</div>
     </content>
-  </a>
-  <divider></divider>
-  <a item ink-color="#B3E5FC" href="https://www.linkedin.com/pub/daniel-nagy/aa/b00/bab" target="_blank">
+  </item>
+  <a ink-color="#B3E5FC" item separate ng-href="https://www.linkedin.com/pub/daniel-nagy/aa/b00/bab" target="_blank">
     <icon src="icons/briefcase.svg"></icon>
     <content>
       <div>LinkedIn</div>
       <div>Professional Networking</div>
     </content>
-  </a>
-  <divider></divider>
-  <a item ink-color="#B3E5FC" href="https://twitter.com/danielnagy13" target="_blank">
+  </item>
+  <a ink-color="#B3E5FC" item separate ng-href="https://twitter.com/danielnagy13" target="_blank">
     <icon src="icons/message.svg"></icon>
     <content>
       <div>Twitter</div>
       <div>@danielnagy13</div>
     </content>
-  </a>
+  </item>
 </list>

@@ -19,11 +19,11 @@
     <drawer id="left" ng-include="'templates/left-drawer.html'" ng-controller="LeftDrawerController" ng-cloak></drawer>
     
     <flex grow="1" shrink="1" layout="column">
-      <toolbar ng-include="'templates/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
+      <toolbar primary ng-include="'templates/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
       <ng-view></ng-view>
     </flex>
     
-    <drawer id="right" lock-open="screen-lg" ng-include="'templates/right-drawer.html'" ng-cloak></drawer>
+    <drawer id="right" full lock-open="screen-lg" ng-include="'templates/right-drawer.html'" ng-controller="RightDrawerController" ng-cloak></drawer>
     
     <!-- production:[src] angular/ -->
     <script type="text/javascript" src="angular/angular.min.js"></script>
@@ -35,6 +35,7 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="scripts/controllers/ToolbarController.js"></script>
     <script type="text/javascript" src="scripts/controllers/LeftDrawerController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/RightDrawerController.js"></script>
     <script type="text/javascript" src="scripts/directives/drawer.js"></script>
     <script type="text/javascript" src="scripts/directives/flex.js"></script>
     <script type="text/javascript" src="scripts/directives/icon.js"></script>

@@ -8,6 +8,11 @@ angular.module('me').factory('$drawer', ['$q', function ($q) {
   return {
     
     get: function (id) {
+      
+      if(promises.hasOwnProperty(id)) {
+        return promises[id].promise;
+      }
+      
       promises[id] = $q.defer();
       
       if(drawers.hasOwnProperty(id)) {

@@ -1,15 +1,15 @@
-<toolbar>
+<wallpaper>
   <gravatar>
     <img src="http://www.gravatar.com/avatar/ce39af8f31844dcf969a24bd9051d434"></img>
   </gravatar>
-  <name flex align="stretch">Daniel Nagy</name>
-</toolbar>
+  <toolbar flex align="stretch">Daniel Nagy</toolbar>
+</wallpaper>
 
 <list>
-  <a item ink-color="#B3E5FC" ng-repeat="item in menu" ng-class="{active: item.active}" ng-href="{{item.href}}">
-    <icon src="{{item.icon}}"></icon>
+  <a ink-color="#B3E5FC" item ng-class="{active: isActive('me')}" href="#me">
+    <icon src="icons/person.svg"></icon>
     <content>
-      <div>{{item.text}}</div>
+      <div>About Me</div>
     </content>
   </a>
 </list>

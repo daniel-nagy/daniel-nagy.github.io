@@ -108,13 +108,13 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
       }
       
       if(attrs.lockOpen) {
-        var mediaQuery = window.matchMedia('(min-width: ' + $media[attrs.lockOpen] +')');
+        var mediaQuery = $media.query('min-width', attrs.lockOpen);
         
-        if(!mediaQuery.matches) {
-          element.detach();
-        } else {
+        if(mediaQuery.matches) {
           element.addClass('locked');
           locked = true;
+        } else {
+          element.detach();
         }
         
         mediaQuery.addListener(function(query) {

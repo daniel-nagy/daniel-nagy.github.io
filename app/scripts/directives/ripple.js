@@ -36,7 +36,7 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
         
         var touchMove;
         
-        element.first().addEventListener('touchstart', function () {
+        element.on('touchstart', function () {
           touchMove = false;
           
           var ink = getInk();
@@ -47,11 +47,11 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
               showInk(ink);
             }
           }, 100);
-        }, true);
+        });
         
-        element.first().addEventListener('touchmove', function () {
+        element.on('touchmove', function () {
           touchMove = true;
-        }, true);
+        });
       }
       
       else {

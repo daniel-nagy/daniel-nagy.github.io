@@ -108,7 +108,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
       }
       
       if(attrs.lockOpen) {
-        var mediaQuery = $media.query('min-width', attrs.lockOpen);
+        var mediaQuery = $media(attrs.lockOpen);
         
         if(mediaQuery.matches) {
           element.addClass('locked');

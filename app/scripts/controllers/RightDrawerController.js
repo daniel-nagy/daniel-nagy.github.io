@@ -3,7 +3,7 @@
 angular.module('me').controller('RightDrawerController', ['$drawer', '$media', '$scope', '$timeout', function ($drawer, $media, $scope, $timeout) {
 
   var drawer;
-  var mediaQuery = $media.query('max-width', 'screen-sm');
+  var mediaQuery = $media('lt-sm');
   
   $scope.showToolbar = mediaQuery.matches;
   

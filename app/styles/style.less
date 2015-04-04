@@ -47,95 +47,14 @@ a {
     
     &:hover {
       color: @darker;
+      cursor: pointer;
     }
   }
-}
-
-[ng-view] {
-  z-index: 0 !important;
-  
-  .min-width(@screen-gt-sm, {
-    margin: 32px auto;
-    max-width: 75%;
-  });
 }
 
 scroll, [scroll] {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-}
-
-.welcome {
-  font-weight: 300;
-  color: @primary;
-  
-  .min-width(@screen-gt-sm, {
-    margin-top: 24px;
-    margin-bottom: 48px;
-    font-size: 42px;
-  });
-  
-  .max-width(@screen-sm, {
-    font-size: 32px;
-    margin-top: 8px;
-    margin-bottom: 24px;
-  });
-}
-
-section {
-
-  .heading {
-    font-size: 28px;
-    font-weight: 300;
-  }
-  
-  img.raise {
-    .elevate();
-  }
-  
-  & + & {
-    border-top: 1px @divider solid;
-  }
-  
-  .min-width(@screen-gt-sm, {
-    img {
-      max-width: 75%;
-      margin: 32px 0;
-    }
-    
-    & + & {
-      margin-top: 64px;
-      padding-top: 64px;
-    }
-    
-    &:first-of-type {
-      margin-top: 32px;
-    }
-    
-    &:last-of-type {
-      margin-bottom: 32px;
-    }
-  });
-  
-  .max-width(@screen-sm, {
-    img {
-      max-width: 100%;
-      margin: 16px 0;
-    }
-    
-    & + & {
-      margin-top: 32px;
-      padding-top: 32px;
-    }
-    
-    &:first-of-type {
-      margin-top: 16px;
-    }
-    
-    &:last-of-type {
-      margin-bottom: 16px;
-    }
-  });
 }
 
 .collapse {
@@ -145,7 +64,9 @@ section {
 @import "backdrop";
 @import "layout";
 @import "left-drawer";
+@import "pages";
 @import "responsive";
+@import "view";
 
 // components
 @import "components/button";

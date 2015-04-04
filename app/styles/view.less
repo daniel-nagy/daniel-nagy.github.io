@@ -1,0 +1,42 @@
+@keyframes slide-in {
+  from {
+    transform: translateX(-125%);
+  }
+}
+
+@keyframes slide-out {
+  to {
+    transform: translateX(125%);
+  }
+}
+
+scroll.view {
+  position: relative;
+}
+
+[ng-view] {
+  position: absolute;
+  left: 0; right: 0;
+  background-color: #fff;
+  z-index: 0 !important;
+
+  &.ng-leave {
+    animation: slide-out 0.75s ease-in-out;
+  }
+
+  &.ng-enter {
+    animation: slide-in 0.75s ease-in-out;
+  }
+
+  .min-width(@screen-gt-sm, {
+    margin: 32px auto;
+    padding: 24px;
+    max-width: 75%;
+    
+    .elevate();
+  });
+
+  .max-width(@screen-sm, {
+    padding: 16px;
+  });
+}

@@ -11,7 +11,7 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
     templateUrl: 'templates/projects.html',
     title: 'Projects'
   }).when('/professional', {
-    templateUrl: 'templates/about.html',
+    templateUrl: 'templates/professional.html',
     title: 'Professional'
   }).otherwise({
     redirectTo  : '/about'

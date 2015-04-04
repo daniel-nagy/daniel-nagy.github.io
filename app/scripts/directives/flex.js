@@ -20,11 +20,11 @@ angular.module('me').directive('flex', function () {
                 'flex': grow + ' ' + shrink + ' ' + basis,
       });
       
-      if(attrs.align) {
+      if(attrs.alignSelf) {
         element.css({
-          '-ms-flex-item-align': attrs.align,
-           '-webkit-align-self': attrs.align,
-                   'align-self': attrs.align
+          '-ms-flex-item-align': attrs.alignSelf,
+           '-webkit-align-self': attrs.alignSelf,
+                   'align-self': attrs.alignSelf
         });
       }
       

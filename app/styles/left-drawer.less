@@ -4,7 +4,6 @@ drawer#left {
     flex-direction: column;
     justify-content: flex-end;
     height: 216px;
-    overflow: hidden;
     background-image: url('/images/profile.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
@@ -16,23 +15,6 @@ drawer#left {
       font-weight: 300;
       color: #fff;
       background-color: @primary;
-    }
-    
-    gravatar {
-      margin: 16px;
-      height: 80px;
-      width: 80px;
-      border-radius: 100%;
-      overflow: hidden;
-      
-      .elevate(2);
-      
-      &:hover {
-        transform: translateY(-2px);
-        .elevate(4);
-      }
-      
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
   }
 }

@@ -10,7 +10,7 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
       
       var style = window.getComputedStyle(element.first());
       
-      function getInk() {
+      function getInk(event) {
         var ink = angular.element('<ink></ink>');
         var rect = element.first().getBoundingClientRect();
         var diameter = Math.max(rect.height, rect.width);
@@ -36,10 +36,10 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
         
         var touchMove;
         
-        element.on('touchstart', function () {
+        element.on('touchstart', function (event) {
           touchMove = false;
           
-          var ink = getInk();
+          var ink = getInk(event);
           
           // cancel if the user is performing a swiping gesture
           setTimeout(function() {
@@ -55,8 +55,8 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
       }
       
       else {
-        element.on('mousedown', function () {
-          showInk(getInk());
+        element.on('mousedown', function (event) {
+          showInk(getInk(event));
         });
       }
     }

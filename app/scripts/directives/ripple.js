@@ -77,8 +77,10 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
 .directive('button', ['rippleDirective', function (rippleDirective) {
   var ripple = rippleDirective.first();
   return {
-    link: function () {
-      ripple.link.apply(ripple, arguments);
+    link: function (scope, element, attrs) {
+      if(attrs.noInk === undefined) {
+        ripple.link.apply(ripple, arguments);
+      }
     }
   };
 }])
@@ -86,8 +88,10 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
 .directive('a', ['rippleDirective', function (rippleDirective) {
   var ripple = rippleDirective.first();
   return {
-    link: function () {
-      ripple.link.apply(ripple, arguments);
+    link: function (scope, element, attrs) {
+      if(attrs.noInk === undefined) {
+        ripple.link.apply(ripple, arguments);
+      }
     }
   };
 }]);

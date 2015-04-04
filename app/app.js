@@ -8,7 +8,7 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
     templateUrl: 'templates/about.html',
     title: 'About Me'
   }).when('/projects', {
-    templateUrl: 'templates/about.html',
+    templateUrl: 'templates/projects.html',
     title: 'Projects'
   }).when('/professional', {
     templateUrl: 'templates/about.html',

@@ -2,16 +2,26 @@ drawer#left {
   wallpaper {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    height: 216px;
     overflow: hidden;
-    background-image: url('/images/autumn.jpg');
+    background-image: url('/images/profile.jpg');
     background-repeat: no-repeat;
-    background-size: auto 100%;
+    background-size: 100%;
+    background-position: bottom;
+    
+    .name {
+      padding: 16px;
+      font-size: 28px;
+      font-weight: 300;
+      color: #fff;
+      background-color: @primary;
+    }
     
     gravatar {
       margin: 16px;
       height: 80px;
       width: 80px;
-      border: 2px rgba(198, 87, 34, 0.8) solid;
       border-radius: 100%;
       overflow: hidden;
       
@@ -23,16 +33,6 @@ drawer#left {
       }
       
       transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-    
-    toolbar {
-      padding: 0 16px;
-      font-size: 20px;
-      color: #fff;
-      background-color: rgba(198, 87, 34, 0.8);
-      box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.5),
-      inset 0 -1px darken(rgba(198, 87, 34, 0.8), 10%),
-      inset 0 1px lighten(rgba(198, 87, 34, 0.8), 15%);
     }
   }
 }

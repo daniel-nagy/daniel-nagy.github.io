@@ -32,6 +32,8 @@ list {
       
       > svg * {
         fill: @secondary-text;
+        
+        transition: fill 0.5s;
       }
     }
     
@@ -60,9 +62,11 @@ list {
         }
       }
     }
+    
+    transition: color 0.5s;
   }
   
-  &[icon-list] > item, [item] {
+  &[icon-list] > item, &[icon-list] > [item] {
     
     &[separate]:not(:last-child):after {
       left: 72px;

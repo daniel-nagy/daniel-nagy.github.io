@@ -1,15 +1,31 @@
-<wallpaper>
-  <gravatar>
+<wallpaper flex>
+  <!-- <gravatar>
     <img src="http://www.gravatar.com/avatar/ce39af8f31844dcf969a24bd9051d434"></img>
-  </gravatar>
-  <toolbar flex align="stretch">Daniel Nagy</toolbar>
+  </gravatar> -->
+  <div class="name">Daniel Nagy</div>
 </wallpaper>
 
-<list>
-  <a ink-color="#B3E5FC" item ng-class="{active: isActive('me')}" href="#me">
-    <icon src="icons/person.svg"></icon>
-    <content>
-      <div>About Me</div>
-    </content>
-  </a>
-</list>
+<scroll>
+
+  <list icon-list>
+    <a ink-color="#B3E5FC" item ng-class="{active: title === 'About Me'}" href="#about">
+      <icon src="icons/person.svg"></icon>
+      <content>
+        <div>About Me</div>
+      </content>
+    </a>
+    <a ink-color="#B3E5FC" item ng-class="{active: title === 'Projects'}" href="#projects">
+      <icon src="icons/scissors.svg"></icon>
+      <content>
+        <div>Projects</div>
+      </content>
+    </a>
+    <a ink-color="#B3E5FC" item ng-class="{active: title === 'Professional'}" href="#professional">
+      <icon src="icons/briefcase.svg"></icon>
+      <content>
+        <div>Professional</div>
+      </content>
+    </a>
+  </list>
+  
+</scroll>

@@ -4,15 +4,28 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
 
 .config(['$routeProvider', function ($routeProvider) {
   
-  $routeProvider.when('/me', {
-    templateUrl: 'templates/me.html'
+  $routeProvider.when('/about', {
+    templateUrl: 'templates/about.html',
+    title: 'About Me'
+  }).when('/projects', {
+    templateUrl: 'templates/about.html',
+    title: 'Projects'
+  }).when('/professional', {
+    templateUrl: 'templates/about.html',
+    title: 'Professional'
   }).otherwise({
-    redirectTo  : '/me'
+    redirectTo  : '/about'
   });
   
 }])
 
-.run(function () {
+.run(['$rootScope', function ($rootScope) {
+  
+  $rootScope.title = 'Me';
+  
+  $rootScope.$on('$routeChangeSuccess', function (event, current) {
+    $rootScope.title = current.title ? current.title : undefined;
+  });
   
   angular.element.prototype.first = function () {
     return this[0];
@@ -26,4 +39,4 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
     return this[0];
   };
   
-});
+}]);

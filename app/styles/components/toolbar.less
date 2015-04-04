@@ -2,8 +2,8 @@ toolbar {
   display: flex;
   align-items: center;
   
-  min-height: 56px;
-  padding: 0 4px;
+  min-height: 64px;
+  padding: 0 12px;
   .elevate();
   
   &[primary] {
@@ -19,15 +19,15 @@ toolbar {
   
   .title {
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 24px;
   }
   
-  .min-width(@screen-sm, {
-    min-height: 64px;
-    padding: 0 12px;
+  .max-width(@screen-sm, {
+    min-height: 56px;
+    padding: 0 4px;
     
     .title {
-      font-size: 24px;
+      font-size: 20px;
     }
   });
 }

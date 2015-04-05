@@ -15,7 +15,9 @@
 @screen-sm: 600px;
 @screen-gt-sm: @screen-sm + 1px;
 @screen-md: 960px;
+@screen-gt-md: @screen-md + 1px;
 @screen-lg: 1200px;
+@screen-gt-lg: @screen-lg + 1px;
 
 html {
   height: 100%;
@@ -34,22 +36,6 @@ body {
   .min-width(@screen-gt-sm, {
     background-color: darken(#fff, 6%);
   });
-}
-
-a {
-  color: @text;
-  text-decoration: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  
-  &[no-ink] {
-    color: @dark;
-    
-    &:hover {
-      color: @darker;
-      cursor: pointer;
-    }
-  }
 }
 
 scroll, [scroll] {
@@ -71,6 +57,7 @@ scroll, [scroll] {
 // components
 @import "components/button";
 @import "components/card";
+@import "components/dialog";
 @import "components/drawer";
 @import "components/icon";
 @import "components/ink";

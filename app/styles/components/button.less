@@ -22,3 +22,24 @@ button {
     cursor: pointer;
   }
 }
+
+a {
+  color: @text;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &[no-ink] {
+    color: @dark;
+    
+    &:hover {
+      color: @darker;
+      cursor: pointer;
+    }
+  }
+  
+  &:not([no-ink]):not([icon]):not([item]) {
+    margin: 0 4px;
+    padding: 10px 8px;
+  }
+}

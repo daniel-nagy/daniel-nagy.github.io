@@ -1,0 +1,62 @@
+dialog-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
+  
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity: 0.0;
+    transform: scale(0.5);
+  }
+  
+  &.ng-leave,
+  &.ng-enter.ng-enter-active {
+    opacity: 1.0;
+    transform: scale(1.0);
+  }
+
+  material-dialog {
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 2px;
+    
+    .elevate(3);
+    
+    .title {
+      flex: 0 0 auto;
+      padding: 24px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+    
+    scroll {
+      padding: 0 24px 16px;
+      color: @secondary-text;
+    }
+    
+    action {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+      padding: 5px 16px;
+      margin-bottom: 8px;
+      
+      button, a {
+        font-size: 14px;
+        font-weight: 500;
+        color: @primary;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

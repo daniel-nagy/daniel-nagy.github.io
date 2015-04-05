@@ -89,9 +89,9 @@ module.exports = function(grunt) {
         },{
           expand: true,
           flatten: true,
-          cwd: 'app/images/',
+          cwd: 'app/media/',
           src: ['*'],
-          dest: 'production/images/'
+          dest: 'production/media/'
         }]
       }
     },

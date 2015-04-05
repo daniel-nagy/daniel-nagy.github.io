@@ -18,7 +18,9 @@
     
     <flex grow="1" shrink="1" layout="column">
       <toolbar primary ng-include="'templates/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
-      <ng-view></ng-view>
+      <scroll flex grow="1" class="view">
+          <div ng-view ng-cloak></div>
+      </scroll>
     </flex>
     
     <drawer id="right" full lock-open="gt-lg" ng-include="'templates/right-drawer.html'" ng-controller="RightDrawerController" ng-cloak></drawer>

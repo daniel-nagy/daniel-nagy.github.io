@@ -1,0 +1,64 @@
+.scoreboard {
+  padding: 0;
+  margin: 32px 0 16px;
+  
+  .secondary {
+    font-size: 14px;
+  }
+  
+  header {
+    padding: 16px;
+    background-color: @primary;
+    border-bottom: 1px @divider solid;
+    
+    > .team-name {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    
+    > .secondary {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  cell {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    
+    .secondary {
+      color: @secondary-text;
+    }
+    
+    .home, .score, .away {
+      display: block;
+      flex: 1 1 33%;
+    }
+    
+    .home > *, .away > * {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .away {
+      text-align: right;
+    }
+    
+    .score {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    &:nth-child(odd) {
+      background-color: darken(#fff, 3%);
+    }
+    
+    &:not(:last-child) {
+      border-bottom: 1px @divider solid;
+    }
+  }
+}

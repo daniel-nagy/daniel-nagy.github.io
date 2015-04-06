@@ -1,25 +1,45 @@
 'use strict';
 
-angular.module('me').controller('MusicController', ['$http', '$scope', function ($http, $scope) {
+angular.module('me').controller('MusicController', ['$audio', '$http', '$scope', function ($audio, $http, $scope) {
   
   $scope.tracks = [{
     duration: '2:55',
+    file: 'media/Sidekick.m4a',
     number: '02',
     title: 'Sidekick'
   }, {
     duration: '3:39',
+    file: 'media/Avalanche.m4a',
     number: '05',
     title: 'Avalanche'
   }, {
     duration: '4:01',
+    file: 'media/Portugal.m4a',
     number: '06',
     title: 'Portugal'
   }];
   
-  $scope.activeTrack = $scope.tracks.first();
-  $scope.currentTime = 0;
+  if($audio.isSet()) {
+    $scope.currentTime = $audio.currentTime();
+    $scope.duration = $audio.duration();
+    $scope.playing = $audio.isPlaying();
+    
+    $scope.tracks.some(function (track) {
+      if(track.title === $audio.name) {
+        $scope.activeTrack = track;
+        return true;
+      }
+    });
+  }
   
-  var audio = new Audio('media/Sidekick.m4a');
+  else {
+    $scope.activeTrack = $scope.tracks.first();
+    $scope.currentTime = 0;
+    $audio.set($scope.activeTrack.title, $scope.activeTrack.file);
+    $audio.on('loadedmetadata', function() {
+      $scope.$apply($scope.duration = $audio.duration());
+    });
+  }
   
   $http.jsonp('https://itunes.apple.com/lookup', {
     cache: true,
@@ -33,29 +53,24 @@ angular.module('me').controller('MusicController', ['$http', '$scope', function 
   });
   
   $scope.play = function () {
-    audio.play();
+    $audio.play();
     $scope.playing = true;
   };
   
   $scope.pause = function () {
-    audio.pause();
+    $audio.pause();
     $scope.playing = false;
   };
   
   $scope.selectTrack = function (track) {
-    audio.setAttribute('src', 'media/' + track.title + '.m4a');
-    
+    $audio.set(track.title, track.file);
     $scope.activeTrack = track;
     $scope.currentTime = 0;
     $scope.play();
   };
   
-  audio.addEventListener("loadedmetadata", function() {
-    $scope.$apply($scope.duration = Math.floor(audio.duration));
-  });
-  
-  audio.addEventListener('timeupdate', function() {
-    $scope.$apply($scope.currentTime = Math.floor(audio.currentTime));
+  $audio.on('timeupdate', function() {
+    $scope.$apply($scope.currentTime = $audio.currentTime());
   });
   
 }])

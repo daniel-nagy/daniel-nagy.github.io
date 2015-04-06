@@ -1,13 +1,17 @@
 drawer#left {
-  wallpaper {
+  profile {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     height: 216px;
-    background-image: url('/media/profile.jpg');
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: bottom;
+    overflow: hidden;
+    
+    img {
+      position: absolute;
+      width: 100%;
+      top: 0;
+    }
     
     .name {
       padding: 16px;
@@ -15,6 +19,7 @@ drawer#left {
       font-weight: 300;
       color: #fff;
       background-color: @primary;
+      z-index: 1;
     }
   }
 }

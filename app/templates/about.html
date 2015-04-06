@@ -21,6 +21,9 @@
 
 <section>
   <div class="heading">Intramural</div>
+  
+  <p>I play intramural soccer. Our team name is The Wombats from Backyard Sports. Our next game is Wednesday, April 8 at 8:00 PM on the Mill St. fields.</p>
+  
   <card class="scoreboard">
     
     <header>
@@ -38,14 +41,14 @@
         <div class="secondary">0-13</div>
       </div>
       <div class="away">
-        <div class="team">The Wombats</div>
+        <div class="team">Wombats</div>
         <div class="secondary">Away</div>
       </div>
     </cell>
     
     <cell>
       <div class="home">
-        <div class="team">The Wombats</div>
+        <div class="team">Wombats</div>
         <div class="secondary">Home</div>
       </div>
       <div class="score">
@@ -68,14 +71,14 @@
         <div class="secondary">1-4</div>
       </div>
       <div class="away">
-        <div class="team">The Wombats</div>
+        <div class="team">Wombats</div>
         <div class="secondary">Away</div>
       </div>
     </cell>
     
     <cell>
       <div class="home">
-        <div class="team">The Wombats</div>
+        <div class="team">Wombats</div>
         <div class="secondary">Home</div>
       </div>
       <div class="score">
@@ -90,3 +93,56 @@
     
   </card>
 </section>
+
+<section ng-controller="MusicController">
+  <div class="heading">Music</div>
+  <p>I love music! Then again, who doesn't?</p>
+  
+  <h4>Private Tracker</h4>
+  
+  <p>I have a What.CD invite if anyone is interested. I'm looking to trade for a BTN or PTP invite.</p>
+  
+  <h4>This Week's Featured Album</h4>
+  
+  <media-player>
+    
+    <div class="artwork">
+      <img ng-src="{{album.artworkUrl600}}"></img>
+    </div>
+    
+    <div class="album">
+      
+      <info>
+        <div class="title">{{album.collectionName}}</div>
+        <div class="artist">{{album.artistName}}</div>
+      </info>
+      
+      <tracks scroll>
+        <div ripple ink-color="#B3E5FC" class="track" ng-repeat="track in tracks" ng-click="selectTrack(track)">
+          <div class="number">{{track.number}}</div>
+          <div class="title">{{track.title}}</div>
+          <div class="duration">{{track.duration}}</div>
+        </div>
+      </tracks>
+      
+      <media>
+        
+        <controls>
+          <button icon src="icons/play.svg" ng-if="!playing" ng-click="play()"></button>
+          <button icon src="icons/pause.svg" ng-if="playing" ng-click="pause()"></button>
+          <div class="title">{{activeTrack.title}}</div>
+          <div class="duration">{{currentTime | playBack}}</div>
+        </controls>
+        
+        <progress value="{{currentTime}}" max="{{duration}}"></progress>
+        
+      </media>
+    </div>
+    
+  </media-player>
+  
+  <p>The media player is a work in progress so it may be a little buggy. For now you can restart a track by clicking on it from within the track listing.</p>
+  
+  <p>Every week I'm going to try to feature a new album with some of my favorite tracks so make sure you're keeping up! This weeks album is TALKING IS HARD by WALK THE MOON. I'm not in love with this album but there are a few songs I really like. Listen for the octaves in base clef in Portugal, Sidekick is about hooking up with your best friend and Avalanche is a neat song about feeling like you met someone in a past life. Check it out on <a no-ink href="https://itunes.apple.com/us/album/talking-is-hard/id936832274" target="_blank">iTunes.</a></p>
+</section>
+

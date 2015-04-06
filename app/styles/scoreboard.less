@@ -4,21 +4,16 @@
   
   .secondary {
     font-size: 14px;
+    color: @secondary-text;
   }
   
   header {
     padding: 16px;
-    background-color: @primary;
     border-bottom: 1px @divider solid;
     
     > .team-name {
-      color: #fff;
       font-size: 18px;
       font-weight: 500;
-    }
-    
-    > .secondary {
-      color: rgba(255, 255, 255, 0.8);
     }
   }
   
@@ -26,10 +21,6 @@
     display: flex;
     flex-direction: row;
     padding: 16px;
-    
-    .secondary {
-      color: @secondary-text;
-    }
     
     .home, .score, .away {
       display: block;
@@ -54,7 +45,7 @@
     }
     
     &:nth-child(odd) {
-      background-color: darken(#fff, 3%);
+      background-color: darken(#fff, 2%);
     }
     
     &:not(:last-child) {

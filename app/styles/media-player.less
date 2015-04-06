@@ -1,0 +1,127 @@
+media-player {
+  display: flex;
+  margin: 32px 0;
+  .elevate();
+  
+  .artwork {
+    max-height: 288px;
+    max-width: 288px;
+    
+    img {
+      width: 100%;
+    }
+  }
+  
+  .album {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    max-height: 288px;
+    
+    info {
+      flex: 0 0 auto;
+      padding: 16px;
+      
+      > .title {
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+    
+    tracks {
+      flex: 1 1 auto;
+      
+      .track {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 16px;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        
+        &:hover {
+          cursor: pointer;
+        }
+        
+        .number + .title {
+          margin-left: 16px;
+        }
+        
+        .title {
+          flex: 1 0 auto;
+        }
+        
+        .duration {
+          font-size: 14px;
+          color: @secondary-text;
+        }
+      }
+    }
+    
+    media {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 auto;
+      
+      controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 6px;
+        border-top: 1px @divider solid;
+        
+        .title {
+          padding-left: 8px;
+          flex: 1 0 auto;
+        }
+        
+        .duration {
+          font-size: 14px;
+          padding: 10px;
+          color: @secondary-text;
+        }
+        
+        button {
+          padding: 6px;
+        }
+      }
+      
+      progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        width: 100%;
+        vertical-align: 0;
+        background: transparent;
+        border: 0;
+        
+        -webkit-appearance: none;
+        
+        &::-webkit-progress-bar {
+          background-color: transparent;
+        }
+        
+        &::-moz-progress-bar {
+          background-color: @primary;
+        }
+        
+        &::-webkit-progress-value {
+          background-color: @primary;
+        }
+      }
+    }
+  }
+  
+  .min-width(@screen-gt-sm, {
+    flex-direction: row;
+  });
+  
+  .max-width(@screen-sm, {
+    flex-direction: column;
+    margin: 32px auto;
+    width: 288px;
+  });
+}

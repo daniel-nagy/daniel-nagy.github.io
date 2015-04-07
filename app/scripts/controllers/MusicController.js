@@ -2,6 +2,17 @@
 
 angular.module('me').controller('MusicController', ['$audio', '$http', '$scope', function ($audio, $http, $scope) {
   
+  $http.jsonp('https://itunes.apple.com/lookup', {
+    cache: true,
+    params: {
+      'callback': 'JSON_CALLBACK',
+      'id': '936832274'
+    }
+  }).success(function(data) {
+    $scope.album = data.results.first();
+    $scope.album.artworkUrl600 = $scope.album.artworkUrl60.replace('60x60-50', '600x600');
+  });
+  
   $scope.tracks = [{
     duration: '2:55',
     file: 'media/Sidekick.m4a',
@@ -19,10 +30,17 @@ angular.module('me').controller('MusicController', ['$audio', '$http', '$scope',
     title: 'Portugal'
   }];
   
-  if($audio.isSet()) {
-    $scope.currentTime = $audio.currentTime();
-    $scope.duration = $audio.duration();
+  var progress = document.querySelector('progress');
+  
+  function updateMediaPlayer() {
     $scope.playing = $audio.isPlaying();
+    $scope.currentTime = $audio.currentTime();
+    progress.value = $audio.currentTime();
+    progress.max = $audio.duration();
+  }
+  
+  if($audio.isSet()) {
+    updateMediaPlayer();
     
     $scope.tracks.some(function (track) {
       if(track.title === $audio.name) {
@@ -34,23 +52,8 @@ angular.module('me').controller('MusicController', ['$audio', '$http', '$scope',
   
   else {
     $scope.activeTrack = $scope.tracks.first();
-    $scope.currentTime = 0;
     $audio.set($scope.activeTrack.title, $scope.activeTrack.file);
-    $audio.on('loadedmetadata', function() {
-      $scope.$apply($scope.duration = $audio.duration());
-    });
   }
-  
-  $http.jsonp('https://itunes.apple.com/lookup', {
-    cache: true,
-    params: {
-      'callback': 'JSON_CALLBACK',
-      'id': '936832274'
-    }
-  }).success(function(data) {
-    $scope.album = data.results.first();
-    $scope.album.artworkUrl600 = $scope.album.artworkUrl60.replace('60x60-50', '600x600');
-  });
   
   $scope.play = function () {
     $audio.play();
@@ -65,12 +68,15 @@ angular.module('me').controller('MusicController', ['$audio', '$http', '$scope',
   $scope.selectTrack = function (track) {
     $audio.set(track.title, track.file);
     $scope.activeTrack = track;
-    $scope.currentTime = 0;
     $scope.play();
   };
   
+  $audio.on('loadedmetadata', updateMediaPlayer);
+  
   $audio.on('timeupdate', function() {
-    $scope.$apply($scope.currentTime = $audio.currentTime());
+    $scope.$apply(function () {
+      progress.value = $scope.currentTime = $audio.currentTime();
+    });
   });
   
 }])
@@ -81,9 +87,10 @@ angular.module('me').controller('MusicController', ['$audio', '$http', '$scope',
     var minutes = Math.floor(input / 60);
     var seconds = input % 60;
     
-    var time = minutes + ':';
-    time += seconds < 10 ? '0' + seconds : seconds;
+    if(seconds < 10) {
+      seconds = '0' + seconds;
+    }
     
-    return time;
+    return minutes + ':' + seconds;
   };
 });

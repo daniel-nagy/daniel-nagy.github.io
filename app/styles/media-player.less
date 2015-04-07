@@ -98,6 +98,11 @@ media-player {
         background: transparent;
         border: 0;
         
+        &::-ms-fill {
+          border: none;
+          color: @primary;
+        }
+        
         -webkit-appearance: none;
         
         &::-webkit-progress-bar {

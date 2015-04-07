@@ -7,13 +7,13 @@ angular.module('me').factory('$audio', function () {
   
   return {
     currentTime: function () {
-      return Math.floor(audio.currentTime) || 0;
+      return this.isSet() ? Math.floor(audio.currentTime) : 0;
     },
     duration: function () {
-      return Math.floor(audio.duration) || 0;
+      return this.isSet() ? Math.floor(audio.duration) : 0;
     },
     isPlaying: function () {
-      return !audio.paused;
+      return this.isSet() ? !audio.paused : false;
     },
     isSet: function () {
       return audio ? true : false;
@@ -25,13 +25,16 @@ angular.module('me').factory('$audio', function () {
       return name;
     },
     play: function () {
-      audio.play();
+      if(this.isSet()) {
+        audio.play();
+      }
     },
     pause: function () {
-      audio.pause();
+      if(this.isSet()) {
+        audio.pause();
+      }
     },
     set: function (name, url) {
-      
       this.name = name;
       
       if(audio) {

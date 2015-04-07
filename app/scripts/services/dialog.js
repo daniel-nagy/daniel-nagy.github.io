@@ -63,7 +63,7 @@ function ($animate, $backdrop, $compile, $controller, $http, $q, $rootScope, $te
       $animate.enter(dialog, document.body).then(function () {
         if(typeof options === 'object' && options.clickOutsideToClose) {
           
-          dialog.children().first().addEventListener('click', function (event) {
+          dialog.children().eq(0).on('click', function (event) {
             event.stopImmediatePropagation();
           });
           

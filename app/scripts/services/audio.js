@@ -10,7 +10,11 @@ angular.module('me').factory('$audio', function () {
       return this.isSet() ? Math.floor(audio.currentTime) : 0;
     },
     duration: function () {
-      return this.isSet() ? Math.floor(audio.duration) : 0;
+      if(this.isSet() && !isNaN(audio.duration)) {
+        return Math.floor(audio.duration);
+      } else {
+        return 0;
+      }
     },
     isPlaying: function () {
       return this.isSet() ? !audio.paused : false;

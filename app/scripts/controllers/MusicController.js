@@ -30,6 +30,8 @@ angular.module('me').controller('MusicController', ['$audio', '$http', '$scope',
     title: 'Portugal'
   }];
   
+  $scope.currentTime = 0;
+  
   var progress = document.querySelector('progress');
   
   function updateMediaPlayer() {

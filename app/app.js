@@ -6,27 +6,29 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
   
   var view = document.querySelector('scroll.view');
   
-  function scrollTop($scroll) {
-    return $scroll(view, view.scrollTop, 0);
-  }
-  
   $routeProvider.when('/about', {
     templateUrl: 'templates/about.html',
     title: 'About Me',
     resolve: {
-      scroll: scrollTop
+      scroll: ['$scroll', function scrollTop($scroll) {
+        return $scroll(view, view.scrollTop, 0);
+      }]
     }
   }).when('/projects', {
     templateUrl: 'templates/projects.html',
     title: 'Projects',
     resolve: {
-      scroll: scrollTop
+      scroll: ['$scroll', function scrollTop($scroll) {
+        return $scroll(view, view.scrollTop, 0);
+      }]
     }
   }).when('/professional', {
     templateUrl: 'templates/professional.html',
     title: 'Professional',
     resolve: {
-      scroll: scrollTop
+      scroll: ['$scroll', function scrollTop($scroll) {
+        return $scroll(view, view.scrollTop, 0);
+      }]
     }
   }).otherwise({
     redirectTo  : '/about'

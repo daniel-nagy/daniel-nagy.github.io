@@ -6,33 +6,15 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
       var parent = element.parent();
       var sibling = element.previous();
       
-      var open = false;
+      var opened = false;
       var locked = false;
       
-      function animateOpen() {
-        var animation;
-        
+      function attachDrawer() {
         if(attrs.id === 'left') {
           parent.prepend(element);
-          animation = $animate.animate(element, {'margin-left': '-' + element.prop('clientWidth') + 'px'}, {'margin-left': '0'});
         } else {
           sibling.after(element);
-          animation = $animate.animate(element, {'margin-right': '-' + element.prop('clientWidth') + 'px'}, {'margin-right': '0'});
         }
-        
-        return animation;
-      }
-      
-      function animateClose() {
-        var animation;
-        
-        if(attrs.id === 'left') {
-          animation = $animate.animate(element, {'margin-left': '0'}, {'margin-left': '-' + element.prop('clientWidth') + 'px'});
-        } else {
-          animation = $animate.animate(element, {'margin-right': '0'}, {'margin-right': '-' + element.prop('clientWidth') + 'px'});
-        }
-        
-        return animation;
       }
       
       function lockDrawer() {
@@ -40,16 +22,13 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
           return;
         }
         
-        element.addClass('locked');
+        element.addClass('locked').removeClass('unlocked');
         
-        if(!open) {
-          animateOpen().finally(scope.$apply());
-        }
-        
-        else {
-          $backdrop.leave().then(function () {
-            $backdrop.off('click');
-          }).finally(scope.$apply());
+        if(opened) {
+          $backdrop.leave().then($backdrop.off('click')).finally(scope.$apply());
+        } else {
+          attachDrawer();
+          $animate.setClass(element, 'open', 'close').finally(scope.$apply());
         }
         
         locked = true;
@@ -60,16 +39,14 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
           return;
         }
         
-        if(open) {
-          element.removeClass('locked');
-          $backdrop.enter().then(function () {
-            $backdrop.on('click', closeDrawer);
-          }).finally(scope.$apply());
+        if(opened) {
+          element.addClass('unlocked').removeClass('locked');
+          $backdrop.enter().then($backdrop.on('click', closeDrawer)).finally(scope.$apply());
         }
         
         else {
-          animateClose().then(function () {
-            element.detach().removeClass('locked');
+          $animate.setClass(element, 'close', 'open').then(function () {
+            element.detach().addClass('unlocked').removeClass('locked');
           }).finally(scope.$apply());
         }
         
@@ -77,30 +54,35 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
       }
       
       function closeDrawer() {
-        if(!open || locked) {
+        if(!opened || locked) {
           return;
         }
         
-        $q.all([animateClose(), $backdrop.leave()]).then(function () {
+        $q.all([$animate.setClass(element, 'close', 'open'), $backdrop.leave()]).then(function () {
           element.detach();
           $backdrop.off('click');
-          open = false;
         }).finally(scope.$apply());
+        
+        opened = false;
       }
       
       function openDrawer() {
-        if(open || locked) {
+        if(opened) {
           return;
         }
         
-        $q.all([animateOpen(), $backdrop.enter()]).then(function () {
+        attachDrawer();
+        $animate.setClass(element, 'open', 'close');
+        
+        $backdrop.enter().then(function () {
           $backdrop.on('click', closeDrawer);
-          open = true;
         });
+        
+        opened = true;
       }
       
       function toggleDrawer() {
-        if(open) {
+        if(opened) {
           closeDrawer();
         } else {
           openDrawer();
@@ -111,10 +93,10 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
         var mediaQuery = $media(attrs.lockOpen);
         
         if(mediaQuery.matches) {
-          element.addClass('locked');
+          element.addClass('locked open');
           locked = true;
         } else {
-          element.detach();
+          element.detach().addClass('unlocked close');
         }
         
         mediaQuery.addListener(function(query) {
@@ -127,7 +109,7 @@ angular.module('me').directive('drawer', ['$animate', '$backdrop', '$drawer', '$
       }
       
       else {
-        element.detach();
+        element.detach().addClass('unlocked close');
       }
       
       $drawer.register(attrs.id, {

@@ -1,43 +1,20 @@
 drawer {
-  position: absolute;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: hidden;
   background-color: #fff;
   transition-duration: 0.35s;
+  -webkit-overflow-scrolling: touch;
+  
   .elevate(2);
   
-  &#left {
-    left: 0;
-    
-    &[full] {
-      transition-property: margin-left, min-width;
-    }
-    
-    &:not([full]) {
-      transition-property: margin-left;
-    }
+  &.unlocked {
+    position: absolute;
   }
   
-  &#right {
-    right: 0;
-    
-    &[full] {
-      transition-property: margin-right, min-width;
-    }
-    
-    &:not([full]) {
-      transition-property: margin-right;
-    }
-  }
-  
-  &[full] {
-    min-width: 320px;
-    
-    .max-width(@screen-sm, {
-      min-width: 100%;
-    });
+  &.locked {
+    position: relative;
   }
   
   &:not([full]) {
@@ -45,7 +22,81 @@ drawer {
     max-width: 264px;
   }
   
-  &.locked {
-    position: static;
+  &[full] {
+    min-width: 320px;
+    max-width: 320px;
+    
+    .max-width(@screen-sm, {
+      min-width: 100%;
+      max-width: 100%;
+    });
+  }
+  
+  &#left {
+    left: 0;
+    
+    &.unlocked {
+      &.open {
+        transform: translateX(0%);
+      }
+      &.close {
+        transform: translateX(-100%);
+      }
+      &:not([full]) {
+        transition-property: transform;
+      }
+      &[full] {
+        transition-property: min-width, transform;
+      }
+    }
+    
+    &.locked {
+      &.open {
+        margin-left: 0;
+      }
+      &.close {
+        margin-left: -264px;
+      }
+      &:not([full]) {
+        transition-property: transform;
+      }
+      &[full] {
+        transition-property: margin-left, min-width;
+      }
+    }
+  }
+  
+  &#right {
+    right: 0;
+    
+    &.unlocked {
+      &.open {
+        transform: translateX(0%);
+      }
+      &.close {
+        transform: translateX(100%);
+      }
+      &:not([full]) {
+        transition-property: transform;
+      }
+      &[full] {
+        transition-property: min-width, transform;
+      }
+    }
+    
+    &.locked {
+      &.open {
+        margin-right: 0;
+      }
+      &.close {
+        margin-right: -320px;
+      }
+      &:not([full]) {
+        transition-property: margin-right;
+      }
+      &[full] {
+        transition-property: min-width, margin-right;
+      }
+    }
   }
 }

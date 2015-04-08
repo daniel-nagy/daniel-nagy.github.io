@@ -7,23 +7,34 @@ angular.module('me').factory('$backdrop', ['$animate', function ($animate) {
   return {
     
     enter: function () {
-      return $animate.enter(backdrop, document.body);
+      var animation = $animate.enter(backdrop, document.body);
+      
+      animation.then(function () {
+        if(backdrop.first().hasOwnProperty('ontouchmove')) {
+          // prevent scroll in mobile safari
+          backdrop.on('touchmove', function (event) {
+            event.preventDefault();
+          });
+        }
+      });
+      
+      return animation;
     },
     
     leave: function () {
       return $animate.leave(backdrop);
     },
     
-    off: function (event, callback) {
-      backdrop.off(event, callback);
+    off: function (event) {
+      backdrop.off(event);
     },
     
-    on: function (event, callback) {
-      backdrop.on(event, callback);
+    on: function (event, handler) {
+      backdrop.on(event, handler);
     },
     
-    one: function (event, callback) {
-      backdrop.one(event, callback);
+    one: function (event, handler) {
+      backdrop.one(event, handler);
     }
   };
 }]);

@@ -17,6 +17,15 @@
 
 section {
 
+  > .date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    
+    color: @secondary-text;
+  }
+  
   > .heading {
     font-size: 28px;
     font-weight: 300;
@@ -35,6 +44,10 @@ section {
   }
 
   .min-width(@screen-gt-sm, {
+    > .date {
+      padding-bottom: 16px;
+    }
+    
     > img {
       max-width: 75%;
       margin: 32px 0;
@@ -42,7 +55,6 @@ section {
 
     & + & {
       margin-top: 64px;
-      padding-top: 64px;
     }
 
     &:first-of-type {
@@ -55,6 +67,10 @@ section {
   });
 
   .max-width(@screen-sm, {
+    > .date {
+      padding-bottom: 8px;
+    }
+    
     > img {
       max-width: 100%;
       margin: 16px 0;
@@ -62,7 +78,6 @@ section {
 
     & + & {
       margin-top: 32px;
-      padding-top: 32px;
     }
 
     &:first-of-type {

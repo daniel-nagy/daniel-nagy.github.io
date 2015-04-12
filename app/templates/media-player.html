@@ -2,7 +2,7 @@
   
   <img ng-src="{{album.artworkUrl600}}"></img>
   
-  <media-toolbar class="primary">
+  <media-toolbar>
     
     <div class="now-playing">
       <div class="track-title">{{activeTrack.title}}</div>
@@ -13,7 +13,6 @@
       <div>
         <button icon src="icons/previous.svg" disabled></button>
         <button icon src="{{playing ? 'icons/pause.svg' : 'icons/play.svg'}}" ng-click="playing ? pause() : play()"></button>
-        <!-- <button icon src="icons/pause.svg" ng-if="playing" ng-click="pause()"></button> -->
         <button icon src="icons/next.svg"></button>
       </div>
       <div>
@@ -37,18 +36,19 @@
       <div class="artist">{{album.artistName}} &middot; 2014</div>
     </info>
     
-    <media-controls>
-      <button icon src="icons/more-vertical.svg" ng-if="media.matches" ng-click="toggle.tracks()"></button>
-    </media-controls>
+    <button icon src="icons/more-vertical.svg" ng-click="showTracks = !showTracks"></button>
     
   </media-toolbar>
   
   
-  <scroll ng-show="showTracks || !media.matches">
+  <scroll ng-show="showTracks">
     <tracks>
       <div class="track" ripple ink-color="#B3E5FC" ng-repeat="track in tracks" ng-click="selectTrack(track)">
         <div class="number">{{track.number}}</div>
-        <div class="track-title">{{track.title}}</div>
+        <div class="title-container">
+          <div class="track-title">{{track.title}}</div>
+          <icon ng-if="track.active" src="{{playing ? 'icons/volume-up.svg' : 'icons/volume-mute.svg'}}"></icon>
+        </div>
         <div class="duration">{{track.duration}}</div>
       </div>
     </tracks>

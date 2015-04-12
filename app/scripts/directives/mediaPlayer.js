@@ -3,45 +3,22 @@
 angular.module('me').directive('mediaPlayer', ['$audio', '$media', function ($audio, $media) {
   return {
     templateUrl: 'templates/media-player.html',
-    link: function (scope, element, attrs) {
-      
-      var toolbar = element.find('media-toolbar').eq(1);
-      var scroll = element.find('scroll');
-      
-      scope.media = $media('(max-width: 700px)');
-      scope.showTracks = !scope.media.matches;
-      
-      scope.toggle = {
-        tracks: function () {
-          scope.showTracks = !scope.showTracks;
-        }
-      };
-      
-      function toggleClasses() {
-        if(scope.media.matches) {
-          toolbar.addClass('primary');
-          scroll.addClass('animate');
-        } else {
-          toolbar.removeClass('primary');
-          scroll.removeClass('animate');
-        }
-      }
-      
-      toggleClasses();
-      scope.media.addListener(function () {
-        scope.$apply(toggleClasses);
-      });
-      
-      scroll.on('scroll', function () {
-        if(scroll.prop('scrollTop') === 0) {
-          toolbar.removeClass('elevated');
-        } else {
-          toolbar.addClass('elevated');
-        }
-      });
-    },
+    link: postLink,
     controller: audioController
   };
+  
+  function postLink(scope, element) {
+    var scroll = element.find('scroll');
+    var toolbar = scroll.previous();
+    
+    scroll.on('scroll', function () {
+      if(scroll.prop('scrollTop') <= 0) {
+        toolbar.removeClass('elevated');
+      } else {
+        toolbar.addClass('elevated');
+      }
+    });
+  }
   
   function audioController($scope, $element) {
     $scope.currentTime = 0;

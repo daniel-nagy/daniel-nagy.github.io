@@ -14,41 +14,49 @@ angular.module('me').controller('MusicController', ['$audio', '$http', '$scope',
   });
   
   $scope.tracks = [{
+    active: false,
     duration: '2:55',
     file: 'media/Sidekick.m4a',
     number: '02',
     title: 'Sidekick'
   }, {
+    active: true,
     duration: '3:18',
     file: 'media/Sidekick.m4a',
     number: '03',
     title: 'Shut Up and Dance'
   }, {
+    active: false,
     duration: '3:39',
     file: 'media/Avalanche.m4a',
     number: '05',
     title: 'Avalanche'
   }, {
+    active: false,
     duration: '4:01',
     file: 'media/Portugal.m4a',
     number: '06',
     title: 'Portugal'
   }, {
+    active: false,
     duration: '2:55',
     file: 'media/Sidekick.m4a',
     number: '02',
     title: 'Sidekick'
   }, {
+    active: false,
     duration: '3:18',
     file: 'media/Sidekick.m4a',
     number: '03',
     title: 'Shut Up and Dance'
   }, {
+    active: false,
     duration: '3:39',
     file: 'media/Avalanche.m4a',
     number: '05',
     title: 'Avalanche'
   }, {
+    active: false,
     duration: '4:01',
     file: 'media/Portugal.m4a',
     number: '06',

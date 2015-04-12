@@ -1,132 +1,250 @@
 media-player {
   display: flex;
-  margin: 32px 0;
   .elevate();
   
-  .artwork {
-    max-height: 288px;
-    max-width: 288px;
+  .artist, .title, .track-title {
+    flex: 1 1 auto;
+    .overflow-ellipsis();
+  }
+  
+  .title {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .duration {
+    margin-left: 16px;
+    font-size: 14px;
+    color: @secondary-text;
+  }
+  
+  media-toolbar {
+    display: flex;
+    padding: 10px;
     
-    img {
-      width: 100%;
+    &.primary {
+      background-color: @primary;
+      color: #fff;
+      
+      button:not(.active) {
+        fill: #fff;
+      }
+      
+      button.active {
+        fill: #FFFF00;
+      }
+    }
+    
+    &:not(.primary) {
+      button:not(.active) {
+        fill: @secondary-text;
+      }
+      
+      button.active {
+        fill: @primary;
+      }
     }
   }
   
-  .album {
+  media-controls {
+    display: flex;
+    
+    button[icon] {
+      padding: 6px;
+      transition: fill 0.5s;
+      
+      &[disabled] {
+        cursor: default;
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      
+      & + button {
+        margin-left: 10px;
+      }
+      
+      &.align-right {
+        margin-left: auto;
+      }
+      
+      ink {
+        z-index: 0;
+      }
+    }
+  }
+  
+  paper {
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
-    max-height: 288px;
+    z-index: 1;
+  }
+  
+  paper:first-of-type {
+    flex: 0 0 auto;
+    width: 288px;
     
-    info {
-      flex: 0 0 auto;
-      padding: 16px;
-      
-      > .title {
-        font-size: 20px;
-        font-weight: 500;
-      }
-    }
-    
-    tracks {
-      flex: 1 1 auto;
-      
-      .track {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 16px;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        
-        &:hover {
-          cursor: pointer;
-        }
-        
-        .number + .title {
-          margin-left: 16px;
-        }
-        
-        .title {
-          flex: 1 0 auto;
-        }
-        
-        .duration {
-          font-size: 14px;
-          color: @secondary-text;
-        }
-      }
-    }
-    
-    media {
-      position: relative;
+    img {
       display: flex;
+      width: 100%;
+    }
+    
+    media-toolbar {
       flex-direction: column;
-      flex: 0 0 auto;
+      position: relative;
       
-      controls {
+      > .now-playing {
         display: flex;
-        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        padding: 6px;
-        border-top: 1px @divider solid;
         
-        .title {
-          padding-left: 8px;
-          flex: 1 0 auto;
+        padding: 6px 6px 10px;
+        
+        > .track-title {
+          font-weight: 500;
         }
         
-        .duration {
-          font-size: 14px;
-          padding: 10px;
-          color: @secondary-text;
-        }
-        
-        button {
-          padding: 6px;
+        > .duration {
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.7);
         }
       }
       
-      progress {
+      media-controls {
+        align-items: center;
+        justify-content: space-between;
+        
+        > div {
+          display: flex;
+        }
+      }
+    }
+    
+    progress {
+      position: absolute;
+      top: 0;
+      left: 0; right: 0;
+      height: 4px;
+      width: 100%;
+      vertical-align: 0;
+      background: transparent;
+      border: 0;
+      
+      &::-ms-fill {
+        border: none;
+        color: #FFFF00;
+      }
+      
+      -webkit-appearance: none;
+      
+      &::-webkit-progress-bar {
+        background-color: transparent;
+      }
+      
+      &::-moz-progress-bar {
+        background-color: #FFFF00;
+      }
+      
+      &::-webkit-progress-value {
+        background-color: #FFFF00;
+      }
+    }
+  }
+  
+  paper:nth-of-type(2) {
+    flex: 1 1 auto;
+    overflow: hidden;
+    
+    media-toolbar {
+      flex: 0 0 auto;
+      justify-content: space-between;
+      z-index: 1;
+      -webkit-transform: translateZ(0%);
+      -webkit-backface-visibility: hidden;
+      
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 1px 2px rgba(0, 0, 0, 0.0);
+      transition: box-shadow 0.25s;
+      
+      &.elevated {
+        .elevate();
+      }
+      
+      info {
+        padding: 6px;
+      }
+      
+      media-controls {
+        margin-left: 4px;
+        
+        > button {
+          margin: auto 0;
+        }
+      }
+    }
+    
+    scroll {
+      flex: 1 1 auto;
+      position: relative;
+      
+      tracks {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
         width: 100%;
-        vertical-align: 0;
-        background: transparent;
-        border: 0;
         
-        &::-ms-fill {
-          border: none;
-          color: @primary;
-        }
-        
-        -webkit-appearance: none;
-        
-        &::-webkit-progress-bar {
-          background-color: transparent;
-        }
-        
-        &::-moz-progress-bar {
-          background-color: @primary;
-        }
-        
-        &::-webkit-progress-value {
-          background-color: @primary;
+        > .track {
+          display: flex;
+          align-items: center;
+          padding: 16px;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          
+          &:hover {
+            cursor: pointer;
+          }
+          
+          .number {
+            margin-right: 16px;
+          }
         }
       }
     }
   }
   
-  .min-width(@screen-gt-sm, {
+  .min-width(@screen-gt-sm + 100px, {
     flex-direction: row;
+    margin: 32px 0;
   });
   
-  .max-width(@screen-sm, {
+  .max-width(@screen-sm + 100px, {
     flex-direction: column;
     margin: 32px auto;
     width: 288px;
+    
+    paper:first-of-type {
+      > media-toolbar {
+        padding-bottom: 4px;
+      }
+    }
+    
+    paper:nth-of-type(2) {
+      
+      > media-toolbar {
+        padding-top: 0;
+      }
+      
+      > scroll {
+        max-height: 250px;
+        
+        &.animate {
+          transition: margin-top 0.5s;
+        }
+        
+        &.ng-hide {
+          margin-top: -250px;
+        }
+        
+        > tracks {
+          position: relative;
+        }
+      }
+    }
   });
 }

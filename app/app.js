@@ -49,7 +49,7 @@ angular.module('me', ['ngAnimate', 'ngRoute'])
   };
   
   angular.element.prototype.previous = function () {
-    return angular.element(this.prop('previousSibling'));
+    return angular.element(this.prop('previousElementSibling'));
   };
   
   Array.prototype.first = function () {

@@ -37,13 +37,16 @@ angular.module('me').factory('$media', ['$rootScope', function ($rootScope) {
   }
   
   function $media(query) {
-    var mediaQuery = mediaQueryConstants[query];
     
-    if(!queries.hasOwnProperty(mediaQuery)) {
-      addQuery(mediaQuery);
+    if(mediaQueryConstants.hasOwnProperty(query)) {
+      query = mediaQueryConstants[query];
     }
     
-    return queries[mediaQuery].query;
+    if(!queries.hasOwnProperty(query)) {
+      addQuery(query);
+    }
+    
+    return queries[query].query;
   }
   
   // $rootScope.$media = function (query) {

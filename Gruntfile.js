@@ -90,7 +90,7 @@ module.exports = function(grunt) {
           expand: true,
           flatten: true,
           cwd: 'app/media/',
-          src: ['*'],
+          src: ['**/*'],
           dest: 'production/media/'
         }]
       }

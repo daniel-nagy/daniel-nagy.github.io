@@ -1,11 +1,20 @@
 'use strict';
 
-angular.module('me').directive('mediaPlayer', function () {
+angular.module('me').directive('mediaPlayer', ['$audio', function ($audio) {
   return {
     templateUrl: 'templates/media-player.html',
     link: function (scope, element) {
+      var progress = element.find('progress');
       var scroll = element.find('scroll');
       var toolbar = scroll.previous();
+      
+      var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
+      
+      progress.on(pointerstart, function (event) {
+        if($audio.isSet()) {
+          $audio.setCurrentTime(event.offsetX * (progress.attr('max') / progress.prop('clientWidth')));
+        }
+      });
       
       scroll.on('scroll', function () {
         if(scroll.prop('scrollTop') <= 0) {
@@ -15,7 +24,7 @@ angular.module('me').directive('mediaPlayer', function () {
         }
       });
     },
-    controller: ['$album', '$attrs', '$audio', '$element', '$scope', function ($album, $attrs, $audio, $element, $scope) {
+    controller: ['$album', '$attrs', '$element', '$scope', function ($album, $attrs, $element, $scope) {
       
       $scope.audio = $audio;
       
@@ -83,7 +92,7 @@ angular.module('me').directive('mediaPlayer', function () {
       };
     }]
   };
-})
+}])
 
 .filter('zeroPad', function () {
   return function (input) {

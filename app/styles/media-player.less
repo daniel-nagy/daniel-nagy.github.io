@@ -118,6 +118,15 @@ media-player {
       vertical-align: 0;
       background: transparent;
       border: 0;
+      -webkit-tap-highlight-color: transparent;
+      
+      &[max="0"] {
+        pointer-events: none;
+      }
+      
+      &:hover:not([max="0"]) {
+        cursor: pointer;
+      }
       
       &::-ms-fill {
         border: none;

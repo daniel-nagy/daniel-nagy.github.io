@@ -56,6 +56,11 @@ angular.module('me').factory('$audio', function () {
       } else {
         audio = new Audio(base + title + '.m4a');
       }
+    },
+    setCurrentTime: function (time) {
+      if(audio) {
+        audio.currentTime = time;
+      }
     }
   };
 });

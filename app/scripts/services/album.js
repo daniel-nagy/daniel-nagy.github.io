@@ -52,7 +52,7 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
   };
   
   Album.prototype.selectTrack = function (index) {
-    return this._current = index;
+    this._current = index;
   };
   
   // Fisher–Yates shuffle

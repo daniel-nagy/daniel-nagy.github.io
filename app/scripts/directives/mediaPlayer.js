@@ -59,7 +59,7 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
       if(playing) {
         $audio.play();
       }
-    }
+    };
     
     $scope.selectPrevious = function () {
       var playing = $audio.isPlaying();
@@ -69,7 +69,7 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
       if(playing) {
         $audio.play();
       }
-    }
+    };
     
     $scope.toggleRepeat = function () {
       if($audio.repeatEnabled()) {

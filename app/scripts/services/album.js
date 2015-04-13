@@ -1,0 +1,101 @@
+'use strict';
+
+angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
+  
+  var albums = [];
+  
+  function Album(collection, tracks) {
+    this.artist = collection.artistName;
+    this.artworkUrl = collection.artworkUrl60.replace('60x60-50', '600x600');
+    this.release = collection.releaseDate.split('-').first();
+    this.title = collection.collectionName;
+    this.trackCount = tracks.length;
+    
+    this.tracks = [];
+    this._current = 0;
+    
+    tracks.forEach(function(track) {
+      this.tracks.push({
+        duration: track.trackTimeMillis / 1000,
+        number: track.trackNumber,
+        title: track.trackName,
+      });
+    }, this);
+  }
+  
+  Album.prototype.currentTrack = function () {
+    return this.tracks[this._current];
+  };
+  
+  Album.prototype.hasNextTrack = function () {
+    return this._current < this.trackCount - 1;
+  };
+  
+  Album.prototype.hasPreviousTrack = function () {
+    return this._current > 0;
+  };
+  
+  Album.prototype.isShuffled = function () {
+    var number = 0;
+    
+    return this.tracks.some(function (track) {
+      return track.number !== ++number;
+    });
+  };
+  
+  Album.prototype.nextTrack = function () {
+    return this._current < this.trackCount - 1 ? this.tracks[++this._current] : null;
+  };
+  
+  Album.prototype.previousTrack = function () {
+    return this._current > 0 ? this.tracks[--this._current] : null;
+  };
+  
+  Album.prototype.selectTrack = function (index) {
+    return this._current = index;
+  };
+  
+  // Fisher–Yates shuffle
+  Album.prototype.shuffle = function () {
+    for(var i = this.tracks.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = this.tracks[i];
+      this.tracks[i] = this.tracks[j];
+      this.tracks[j] = temp;
+    }
+  };
+  
+  Album.prototype.unShuffle = function () {
+    this.tracks.sort(function (a, b) {
+      return a.number - b.number;
+    });
+  };
+  
+  function $album(collectionId) {
+    
+    var defer = $q.defer();
+    
+    if(albums.hasOwnProperty(collectionId)) {
+      defer.resolve(albums[collectionId]);
+    }
+    
+    else {
+      $http.jsonp('https://itunes.apple.com/lookup', {
+        cache: true,
+        params: {
+          'callback': 'JSON_CALLBACK',
+          'id': collectionId,
+          'entity': 'song'
+        }
+      }).success(function(data) {
+        var album = new Album(data.results.first(), data.results.splice(1));
+        albums[collectionId] = album;
+        defer.resolve(album);
+      });
+    }
+    
+    return defer.promise;
+  }
+  
+  return $album;
+}]);

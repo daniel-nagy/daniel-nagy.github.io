@@ -13,6 +13,7 @@ media-player {
   }
   
   .duration {
+    flex: 0 0 auto;
     margin-left: 16px;
     font-size: 14px;
     color: @secondary-text;
@@ -158,6 +159,7 @@ media-player {
       
       info {
         padding: 6px;
+        overflow: hidden;
       }
       
       > button[icon] {
@@ -185,6 +187,7 @@ media-player {
           }
           
           .number {
+            flex: 0 0 auto;
             margin-right: 16px;
           }
           
@@ -193,8 +196,11 @@ media-player {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            overflow: hidden;
             
             > icon {
+              height: 18px;
+              width: 18px;
               padding: 0;
               margin-left: 16px;
             }

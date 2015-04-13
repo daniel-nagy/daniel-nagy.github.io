@@ -3,7 +3,7 @@
 angular.module('me').factory('$audio', function () {
   
   var audio;
-  var name;
+  var base = 'media/Among the Wildest Things/';
   
   return {
     currentTime: function () {
@@ -23,10 +23,9 @@ angular.module('me').factory('$audio', function () {
       return audio ? true : false;
     },
     on: function (event, callback) {
-      audio.addEventListener(event, callback);
-    },
-    name: function () {
-      return name;
+      if(this.isSet()) {
+        audio.addEventListener(event, callback);
+      }
     },
     play: function () {
       if(this.isSet()) {
@@ -38,13 +37,24 @@ angular.module('me').factory('$audio', function () {
         audio.pause();
       }
     },
-    set: function (name, url) {
-      this.name = name;
-      
+    repeatEnabled: function () {
+      return audio ? audio.hasAttribute('loop') : false;
+    },
+    repeatOff: function () {
       if(audio) {
-        audio.setAttribute('src', url);
+        audio.removeAttribute('loop');
+      }
+    },
+    repeatOn: function () {
+      if(audio) {
+        audio.setAttribute('loop', '');
+      }
+    },
+    set: function (title) {
+      if(audio) {
+        audio.setAttribute('src', base + title + '.m4a');
       } else {
-        audio = new Audio(url);
+        audio = new Audio(base + title + '.m4a');
       }
     }
   };

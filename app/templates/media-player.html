@@ -1,27 +1,27 @@
 <paper>
   
-  <img ng-src="{{album.artworkUrl600}}"></img>
+  <img ng-src="{{album.artworkUrl}}"></img>
   
   <media-toolbar>
     
     <div class="now-playing">
-      <div class="track-title">{{activeTrack.title}}</div>
-      <div class="duration">{{currentTime | playBack}}</div>
+      <div class="track-title">{{album.currentTrack().title}}</div>
+      <div class="duration">{{audio.currentTime() | playBack}}</div>
     </div>
     
     <media-controls>
       <div>
-        <button icon src="icons/previous.svg" disabled></button>
-        <button icon src="{{playing ? 'icons/pause.svg' : 'icons/play.svg'}}" ng-click="playing ? pause() : play()"></button>
-        <button icon src="icons/next.svg"></button>
+        <button icon src="icons/previous.svg" ng-disabled="!album.hasPreviousTrack()" ng-click="selectPrevious()"></button>
+        <button icon src="{{audio.isPlaying() ? 'icons/pause.svg' : 'icons/play.svg'}}" ng-click="audio.isPlaying() ? audio.pause() : audio.play()"></button>
+        <button icon src="icons/next.svg" ng-disabled="!album.hasNextTrack()" ng-click="selectNext()"></button>
       </div>
       <div>
-        <button icon src="icons/shuffle.svg" ng-click="toggleShuffle()" ng-class="{active: shuffle}"></button>
-        <button icon src="icons/repeat.svg" ng-click="toggleRepeat()" ng-class="{active: repeat}"></button>
+        <button icon src="icons/shuffle.svg" ng-click="toggleShuffle()" ng-class="{active: album.isShuffled()}"></button>
+        <button icon src="icons/repeat.svg" ng-click="toggleRepeat()" ng-class="{active: audio.repeatEnabled()}"></button>
       </div>
     </media-controls>
     
-    <progress></progress>
+    <progress ng-attr-value="{{audio.currentTime()}}" max="{{audio.duration()}}"></progress>
     
   </media-toolbar>
   
@@ -32,8 +32,8 @@
   <media-toolbar>
     
     <info>
-      <div class="title">{{album.collectionName}}</div>
-      <div class="artist">{{album.artistName}} &middot; 2014</div>
+      <div class="title">{{album.title}}</div>
+      <div class="artist">{{album.artist}} &middot; {{album.release}}</div>
     </info>
     
     <button icon src="icons/more-vertical.svg" ng-click="showTracks = !showTracks"></button>
@@ -43,13 +43,13 @@
   
   <scroll ng-show="showTracks">
     <tracks>
-      <div class="track" ripple ink-color="#B3E5FC" ng-repeat="track in tracks" ng-click="selectTrack(track)">
-        <div class="number">{{track.number}}</div>
+      <div class="track" ripple ink-color="#B3E5FC" ng-repeat="track in album.tracks" ng-click="selectTrack(track, $index)">
+        <div class="number">{{track.number | zeroPad}}</div>
         <div class="title-container">
           <div class="track-title">{{track.title}}</div>
-          <icon ng-if="track.active" src="{{playing ? 'icons/volume-up.svg' : 'icons/volume-mute.svg'}}"></icon>
+          <icon ng-if="album._current === $index" src="{{audio.isPlaying() ? 'icons/volume-up.svg' : 'icons/volume-mute.svg'}}"></icon>
         </div>
-        <div class="duration">{{track.duration}}</div>
+        <div class="duration">{{track.duration | playBack}}</div>
       </div>
     </tracks>
   </scroll>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('me').directive('mediaPlayer', ['$audio', '$media', function ($audio, $media) {
+angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($album, $audio) {
   return {
     templateUrl: 'templates/media-player.html',
     link: postLink,
@@ -20,92 +20,86 @@ angular.module('me').directive('mediaPlayer', ['$audio', '$media', function ($au
     });
   }
   
-  function audioController($scope, $element) {
-    $scope.currentTime = 0;
+  function audioController($scope, $element, $attrs) {
     
-    var progress = $element.find('progress').first();
+    $scope.audio = $audio;
     
-    function updateMediaPlayer() {
-      $scope.playing = $audio.isPlaying();
-      $scope.currentTime = $audio.currentTime();
-      progress.value = $audio.currentTime();
-      progress.max = $audio.duration();
-    }
-    
-    if($audio.isSet()) {
-      updateMediaPlayer();
+    $album($attrs.collectionId).then(function (album) {
+      $scope.album = album;
       
-      $scope.tracks.some(function (track) {
-        if(track.title === $audio.name) {
-          $scope.activeTrack = track;
-          return true;
+      if(!$audio.isSet()) {
+        $audio.set($scope.album.currentTrack().title);
+      }
+      
+      $audio.on('timeupdate', function () {
+        $scope.$apply();
+      });
+      
+      $audio.on('ended', function () {
+        if($scope.album.hasNextTrack()) {
+          $scope.$apply(function () {
+            $audio.set($scope.album.nextTrack().title);
+            $audio.play();
+          });
         }
       });
-    }
+    });
     
-    else {
-      $scope.activeTrack = $scope.tracks.first();
-      $audio.set($scope.activeTrack.title, $scope.activeTrack.file);
-    }
-    
-    $scope.play = function () {
+    $scope.selectTrack = function (track, index) {
+      $scope.album.selectTrack(index);
+      $audio.set(track.title);
       $audio.play();
-      $scope.playing = true;
     };
     
-    $scope.pause = function () {
-      $audio.pause();
-      $scope.playing = false;
-    };
+    $scope.selectNext = function () {
+      var playing = $audio.isPlaying();
+      
+      $audio.set($scope.album.nextTrack().title);
+      
+      if(playing) {
+        $audio.play();
+      }
+    }
     
-    $scope.selectTrack = function (track) {
-      $audio.set(track.title, track.file);
-      $scope.activeTrack = track;
-      $scope.play();
-    };
+    $scope.selectPrevious = function () {
+      var playing = $audio.isPlaying();
+      
+      $audio.set($scope.album.previousTrack().title);
+      
+      if(playing) {
+        $audio.play();
+      }
+    }
     
     $scope.toggleRepeat = function () {
-      
-      if($scope.repeat) {
-        $scope.repeat = false;
+      if($audio.repeatEnabled()) {
+        $audio.repeatOff();
+      } else {
+        $audio.repeatOn();
       }
-      
-      else {
-        $scope.repeat = true;
-      }
-    }
+    };
     
     $scope.toggleShuffle = function () {
-      
-      if($scope.shuffle) {
-        $scope.shuffle = false;
+      if($scope.album.isShuffled()) {
+        $scope.album.unShuffle();
+      } else {
+        $scope.album.shuffle();
       }
-      
-      else {
-        $scope.shuffle = true;
-      }
-    }
-    
-    $audio.on('loadedmetadata', updateMediaPlayer);
-    
-    $audio.on('timeupdate', function() {
-      $scope.$apply(function () {
-        progress.value = $scope.currentTime = $audio.currentTime();
-      });
-    });
+    };
   }
 }])
 
-.filter('playBack', function () {
+.filter('zeroPad', function () {
   return function (input) {
+    return input < 10 ? '0' + input : input;
+  };
+})
 
+.filter('playBack', ['$filter', function ($filter) {
+  return function (input) {
     var minutes = Math.floor(input / 60);
-    var seconds = input % 60;
-
-    if(seconds < 10) {
-      seconds = '0' + seconds;
-    }
-
+    var seconds = $filter('zeroPad')(Math.floor(input % 60));
+    
     return minutes + ':' + seconds;
   };
-});
+}]);

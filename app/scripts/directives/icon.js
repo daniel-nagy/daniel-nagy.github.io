@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('me').directive('icon', ['$http', '$templateCache', '$timeout', function ($http, $templateCache, $timeout) {
+angular.module('me').directive('icon', ['$http', '$templateCache', function ($http, $templateCache) {
   return {
     link: function(scope, element, attrs) {
       attrs.$observe('src', function (url) {

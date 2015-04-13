@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($album, $audio) {
+angular.module('me').directive('mediaPlayer', function () {
   return {
     templateUrl: 'templates/media-player.html',
-    link: function postLink(scope, element) {
+    link: function (scope, element) {
       var scroll = element.find('scroll');
       var toolbar = scroll.previous();
       
@@ -15,7 +15,7 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
         }
       });
     },
-    controller: function audioController($scope, $element, $attrs) {
+    controller: ['$album', '$attrs', '$audio', '$element', '$scope', function ($album, $attrs, $audio, $element, $scope) {
       
       $scope.audio = $audio;
       
@@ -81,9 +81,9 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
           $scope.album.shuffle();
         }
       };
-    }
+    }]
   };
-}])
+})
 
 .filter('zeroPad', function () {
   return function (input) {

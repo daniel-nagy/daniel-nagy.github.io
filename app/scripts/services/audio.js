@@ -22,9 +22,9 @@ angular.module('me').factory('$audio', function () {
     isSet: function () {
       return audio ? true : false;
     },
-    on: function (event, callback) {
+    on: function (target, callback) {
       if(this.isSet()) {
-        audio.addEventListener(event, callback);
+        audio.addEventListener(target, callback);
       }
     },
     play: function () {
@@ -52,7 +52,8 @@ angular.module('me').factory('$audio', function () {
     },
     set: function (title) {
       if(audio) {
-        audio.setAttribute('src', base + title + '.m4a');
+        audio.src = base + title + '.m4a';
+        audio.load();
       } else {
         audio = new Audio(base + title + '.m4a');
       }

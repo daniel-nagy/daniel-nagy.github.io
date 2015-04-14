@@ -60,12 +60,18 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
     for(var i = this.tracks.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var temp = this.tracks[i];
+      
       this.tracks[i] = this.tracks[j];
       this.tracks[j] = temp;
+      
+      if(this._current === j) {
+        this._current = i;
+      }
     }
   };
   
   Album.prototype.unShuffle = function () {
+    this._current = this.tracks[this._current].number - 1;
     this.tracks.sort(function (a, b) {
       return a.number - b.number;
     });

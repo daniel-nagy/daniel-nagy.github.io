@@ -1,20 +1,11 @@
 'use strict';
 
-angular.module('me').directive('mediaPlayer', ['$audio', function ($audio) {
+angular.module('me').directive('mediaPlayer', function () {
   return {
     templateUrl: 'templates/media-player.html',
     link: function (scope, element) {
-      var progress = element.find('progress');
       var scroll = element.find('scroll');
       var toolbar = scroll.previous();
-      
-      var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
-      
-      progress.on(pointerstart, function (event) {
-        if($audio.isSet()) {
-          $audio.setCurrentTime(event.offsetX * (progress.attr('max') / progress.prop('clientWidth')));
-        }
-      });
       
       scroll.on('scroll', function () {
         if(scroll.prop('scrollTop') <= 0) {
@@ -24,7 +15,7 @@ angular.module('me').directive('mediaPlayer', ['$audio', function ($audio) {
         }
       });
     },
-    controller: ['$album', '$attrs', '$element', '$scope', function ($album, $attrs, $element, $scope) {
+    controller: ['$album', '$audio', '$attrs', '$element', '$scope', function ($album, $audio, $attrs, $element, $scope) {
       
       $scope.audio = $audio;
       
@@ -39,6 +30,10 @@ angular.module('me').directive('mediaPlayer', ['$audio', function ($audio) {
           $scope.$apply();
         });
         
+        $audio.on('durationchange', function () {
+          $scope.$apply();
+        });
+        
         $audio.on('ended', function () {
           if($scope.album.hasNextTrack()) {
             $scope.$apply(function () {
@@ -46,6 +41,21 @@ angular.module('me').directive('mediaPlayer', ['$audio', function ($audio) {
               $audio.play();
             });
           }
+        });
+        
+        var progress = $element.find('progress');
+        
+        $audio.on('progress', function () {
+          var buffered = $audio.buffered();
+          var complete = buffered.end(buffered.length - 1);
+          var clip = progress.prop('clientWidth') * (complete / $audio.duration()) + 'px';
+          progress.css('clip', 'rect(0, ' + clip + ', 4px, 0)');
+        });
+        
+        var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
+        
+        progress.on(pointerstart, function (event) {
+          $audio.setCurrentTime(event.offsetX * (progress.attr('max') / progress.prop('clientWidth')));
         });
       });
       
@@ -92,7 +102,7 @@ angular.module('me').directive('mediaPlayer', ['$audio', function ($audio) {
       };
     }]
   };
-}])
+})
 
 .filter('zeroPad', function () {
   return function (input) {

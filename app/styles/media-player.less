@@ -111,20 +111,18 @@ media-player {
     
     progress {
       position: absolute;
-      top: 0;
+      top: -4px;
       left: 0;
       height: 4px;
       width: 100%;
+      clip: rect(0, 0, 4px, 0);
       vertical-align: 0;
-      background: transparent;
+      background-color: rgba(255, 255, 255, 0.5);
       border: 0;
       -webkit-tap-highlight-color: transparent;
+      transition: clip 0.5s ease-out;
       
-      &[max="0"] {
-        pointer-events: none;
-      }
-      
-      &:hover:not([max="0"]) {
+      &:hover {
         cursor: pointer;
       }
       
@@ -136,7 +134,7 @@ media-player {
       -webkit-appearance: none;
       
       &::-webkit-progress-bar {
-        background-color: transparent;
+        background-color: rgba(255, 255, 255, 0.5);
       }
       
       &::-moz-progress-bar {

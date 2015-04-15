@@ -6,6 +6,9 @@ angular.module('me').factory('$audio', function () {
   var base = 'media/Among the Wildest Things/';
   
   return {
+    buffered: function () {
+      return this.isSet() ? audio.buffered : 0;
+    },
     currentTime: function () {
       return this.isSet() ? Math.floor(audio.currentTime) : 0;
     },

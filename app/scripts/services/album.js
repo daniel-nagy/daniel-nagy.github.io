@@ -77,8 +77,7 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
     });
   };
   
-  function $album(collectionId) {
-    
+  return function (collectionId) {
     var defer = $q.defer();
     
     if(albums.hasOwnProperty(collectionId)) {
@@ -86,22 +85,28 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
     }
     
     else {
-      $http.jsonp('https://itunes.apple.com/lookup', {
-        cache: true,
-        params: {
-          'callback': 'JSON_CALLBACK',
-          'id': collectionId,
-          'entity': 'song'
-        }
-      }).success(function(data) {
-        var album = new Album(data.results.first(), data.results.splice(1));
-        albums[collectionId] = album;
-        defer.resolve(album);
-      });
+      var itunesLookup = JSON.parse(localStorage.getItem(collectionId));
+      
+      if(itunesLookup) {
+        albums[collectionId] = new Album(itunesLookup.results.shift(), itunesLookup.results);
+        defer.resolve(albums[collectionId]);
+      }
+      
+      else {
+        $http.jsonp('https://itunes.apple.com/lookup', {
+          params: {
+            'callback': 'JSON_CALLBACK',
+            'id': collectionId,
+            'entity': 'song'
+          }
+        }).success(function (data) {
+          localStorage.setItem(collectionId, JSON.stringify(data));
+          albums[collectionId] = new Album(data.results.shift(), data.results);
+          defer.resolve(albums[collectionId]);
+        });
+      }
     }
-    
     return defer.promise;
-  }
+  };
   
-  return $album;
 }]);

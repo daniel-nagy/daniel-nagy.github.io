@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('me').factory('$audio', function () {
-  
   var audio;
   var base = 'media/Among the Wildest Things/';
   
   return {
     buffered: function () {
-      return this.isSet() ? audio.buffered : 0;
+      if(this.isSet() && audio.buffered.length) {
+        return Math.floor(audio.buffered.end(audio.buffered.length - 1));
+      } else {
+        return 0;
+      }
     },
     currentTime: function () {
       return this.isSet() ? Math.floor(audio.currentTime) : 0;

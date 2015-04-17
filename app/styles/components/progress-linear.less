@@ -1,0 +1,19 @@
+progress-linear {
+  position: relative;
+  height: 5px;
+  width: 100%;
+  background-color: @lighter;
+  -webkit-tap-highlight-color: transparent;
+  
+  &[buffered] {
+    transition: clip 0.5s ease-out;
+  }
+  
+  > bar {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 0%;
+    background-color: @primary;
+    transition: width 0.25s ease-out;
+  }
+}

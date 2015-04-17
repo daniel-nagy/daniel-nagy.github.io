@@ -16,7 +16,6 @@ angular.module('me').directive('mediaPlayer', function () {
       });
     },
     controller: ['$album', '$audio', '$attrs', '$element', '$scope', function ($album, $audio, $attrs, $element, $scope) {
-      
       $scope.audio = $audio;
       
       $album($attrs.collectionId).then(function (album) {
@@ -43,14 +42,11 @@ angular.module('me').directive('mediaPlayer', function () {
           }
         });
         
-        var progress = $element.find('progress');
-        
         $audio.on('progress', function () {
-          var buffered = $audio.buffered();
-          var complete = buffered.end(buffered.length - 1);
-          var clip = progress.prop('clientWidth') * (complete / $audio.duration()) + 'px';
-          progress.css('clip', 'rect(0, ' + clip + ', 4px, 0)');
+          $scope.$apply();
         });
+        
+        var progress = $element.find('progress-linear');
         
         var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
         

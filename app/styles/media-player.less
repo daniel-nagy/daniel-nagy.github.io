@@ -109,39 +109,17 @@ media-player {
       }
     }
     
-    progress {
+    progress-linear {
       position: absolute;
-      top: -4px;
-      left: 0;
       height: 4px;
-      width: 100%;
-      clip: rect(0, 0, 4px, 0);
-      vertical-align: 0;
+      top: -4px; left: 0;
       background-color: rgba(255, 255, 255, 0.5);
-      border: 0;
-      -webkit-tap-highlight-color: transparent;
-      transition: clip 0.5s ease-out;
       
       &:hover {
         cursor: pointer;
       }
       
-      &::-ms-fill {
-        border: none;
-        color: #FFFF00;
-      }
-      
-      -webkit-appearance: none;
-      
-      &::-webkit-progress-bar {
-        background-color: rgba(255, 255, 255, 0.5);
-      }
-      
-      &::-moz-progress-bar {
-        background-color: #FFFF00;
-      }
-      
-      &::-webkit-progress-value {
+      > bar {
         background-color: #FFFF00;
       }
     }

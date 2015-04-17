@@ -8,7 +8,7 @@ angular.module('me').directive('progressLinear', function () {
       
       if(attrs.buffered) {
         var height = element.prop('clientHeight');
-        element.css('clip', 'rect(0, ' + '0px, ' + height + 'px, 0)');
+        element.css('clip', 'rect(0, ' + '0, ' + height + 'px, 0)');
         
         attrs.$observe('buffered', function () {
           var width = element.prop('clientWidth') * (attrs.buffered / attrs.max);

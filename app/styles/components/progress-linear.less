@@ -3,17 +3,75 @@ progress-linear {
   height: 5px;
   width: 100%;
   background-color: @lighter;
-  -webkit-tap-highlight-color: transparent;
-  
-  &[buffered] {
-    transition: clip 0.5s ease-out;
-  }
+  overflow: hidden;
+  tap-highlight-color: transparent;
+  transition: clip 0.5s ease-out;
   
   > bar {
     position: absolute;
     top: 0; bottom: 0;
+  }
+  
+  > bar:first-of-type {
     width: 0%;
-    background-color: @primary;
     transition: width 0.25s ease-out;
+  }
+  
+  > bar:nth-of-type(2) {
+    width: 100%;
+    animation-name: indeterminate;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-iteration-count: 0;
+  }
+  
+  &[indeterminate] > bar:nth-of-type(2) {
+    animation-iteration-count: infinite;
+  }
+  
+  &:not([indeterminate]) > bar:nth-of-type(2) {
+    display: none;
+  }
+}
+
+@keyframes indeterminate {
+  /* accelerate and grow */
+  0% {
+    transform: translateX(-75%) scaleX(0.5)
+  }
+  10% {
+    transform: translateX(-58.5%) scaleX(0.5)
+  }
+  20% {
+    transform: translateX(-33.75%) scaleX(0.5)
+  }
+  30% {
+    transform: translateX(-0.75%) scaleX(0.6)
+  }
+  40% {
+    transform: translateX(40.5%) scaleX(0.7)
+  }
+  49.99% {
+    transform: translateX(90%) scaleX(0.8)
+  }
+  /* decelerate and shrink */
+  50% {
+    transform: translateX(-80%) scaleX(0.6)
+  }
+  60% {
+    transform: translateX(-39.5%) scaleX(0.5)
+  }
+  70% {
+    transform: translateX(-5.75%) scaleX(0.4)
+  }
+  80% {
+    transform: translateX(21.25%) scaleX(0.3)
+  }
+  90% {
+    transform: translateX(41.5%) scaleX(0.2)
+  }
+  100% {
+    transform: translateX(55%) scaleX(0.1)
   }
 }

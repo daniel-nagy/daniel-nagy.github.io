@@ -42,11 +42,27 @@ angular.module('me').directive('mediaPlayer', function () {
           }
         });
         
+        var progress = $element.find('progress-linear');
+        
+        $audio.on('loadstart', function () {
+          $scope.$apply($scope.loading = true);
+        });
+        
+        $audio.on('canplaythrough', function () {
+          progress.one('animationiteration webkitAnimationIteration', function () {
+            $scope.$apply($scope.loading = undefined);
+          });
+        });
+        
+        $audio.on('suspend', function () {
+          progress.one('animationiteration webkitAnimationIteration', function () {
+            $scope.$apply($scope.loading = undefined);
+          });
+        });
+        
         $audio.on('progress', function () {
           $scope.$apply();
         });
-        
-        var progress = $element.find('progress-linear');
         
         var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
         

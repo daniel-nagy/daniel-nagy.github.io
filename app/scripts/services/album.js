@@ -97,6 +97,7 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
           params: {
             'callback': 'JSON_CALLBACK',
             'id': collectionId,
+            'country': 'nz',
             'entity': 'song'
           }
         }).success(function (data) {

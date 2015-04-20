@@ -19,7 +19,6 @@ progress-linear {
   
   > bar:nth-of-type(2) {
     width: 100%;
-    animation-name: indeterminate;
     animation-duration: 2s;
     animation-timing-function: linear;
     animation-fill-mode: both;
@@ -27,6 +26,7 @@ progress-linear {
   }
   
   &[indeterminate] > bar:nth-of-type(2) {
+    animation-name: indeterminate;
     animation-iteration-count: infinite;
   }
   

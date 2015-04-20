@@ -6,7 +6,7 @@
     
     <div class="now-playing">
       <div class="track-title">{{album.currentTrack().title}}</div>
-      <div class="duration">{{audio.currentTime() | playBack}}</div>
+      <div class="duration">{{currentTime | playBack}}</div>
     </div>
     
     <media-controls>
@@ -21,7 +21,7 @@
       </div>
     </media-controls>
     
-    <progress-linear ng-attr-indeterminate="{{loading}}" value="{{audio.currentTime()}}" max="{{audio.duration()}}" buffered="{{audio.buffered()}}"></progress-linear>
+    <progress-linear ng-attr-indeterminate="{{loading}}" value="{{currentTime}}" max="{{duration}}" buffered="{{buffered}}"></progress-linear>
     
   </media-toolbar>
   

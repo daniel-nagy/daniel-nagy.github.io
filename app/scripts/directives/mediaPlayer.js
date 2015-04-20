@@ -25,27 +25,19 @@ angular.module('me').directive('mediaPlayer', function () {
           $audio.set($scope.album.currentTrack().title);
         }
         
-        $audio.on('timeupdate', function () {
-          $scope.$apply();
-        });
-        
-        $audio.on('durationchange', function () {
-          $scope.$apply();
-        });
-        
-        $audio.on('ended', function () {
-          if($scope.album.hasNextTrack()) {
-            $scope.$apply(function () {
-              $audio.set($scope.album.nextTrack().title);
-              $audio.play();
-            });
-          }
-        });
-        
         var progress = $element.find('progress-linear');
         
         $audio.on('loadstart', function () {
-          $scope.$apply($scope.loading = true);
+          $scope.$apply(function () {
+            $scope.currentTime = 0;
+            $scope.duration = 0;
+            $scope.buffered = 0;
+            $scope.loading = true;
+          });
+        });
+        
+        $audio.on('progress', function () {
+          $scope.$apply($scope.buffered = $audio.buffered());
         });
         
         $audio.on('canplaythrough', function () {
@@ -60,8 +52,21 @@ angular.module('me').directive('mediaPlayer', function () {
           });
         });
         
-        $audio.on('progress', function () {
-          $scope.$apply();
+        $audio.on('durationchange', function () {
+          $scope.$apply($scope.duration = $audio.duration());
+        });
+        
+        $audio.on('timeupdate', function () {
+          $scope.$apply($scope.currentTime = $audio.currentTime());
+        });
+        
+        $audio.on('ended', function () {
+          if($scope.album.hasNextTrack()) {
+            $scope.$apply(function () {
+              $audio.set($scope.album.nextTrack().title);
+              $audio.play();
+            });
+          }
         });
         
         var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';

@@ -6,11 +6,17 @@ angular.module('me').directive('progressLinear', function () {
     link: function (scope, element, attrs) {
       var bar = element.find('bar').eq(0);
       
+      function clipProgress(height, width) {
+        if(attrs.max > 0) {
+          element.css('clip', 'rect(0, ' + (width * (attrs.buffered / attrs.max)) + 'px, ' + height + 'px, 0)');
+        } else {
+          element.css('clip', 'rect(0, ' + '0, ' + height + 'px, 0)');
+        }
+      }
+      
       attrs.$observe('buffered', function () {
         if(!attrs.indeterminate) {
-          var height = element.prop('clientHeight');
-          var width = element.prop('clientWidth') * (attrs.buffered / attrs.max);
-          element.css('clip', 'rect(0, ' + width + 'px, ' + height + 'px, 0)');
+          clipProgress(element.prop('clientHeight'), element.prop('clientWidth'));
         }
       });
       
@@ -26,7 +32,7 @@ angular.module('me').directive('progressLinear', function () {
         if(attrs.indeterminate) {
           element.css('clip', 'rect(0, ' + width + 'px, ' + height + 'px, 0)');
         } else if(attrs.buffered) {
-          element.css('clip', 'rect(0, ' + (width * (attrs.buffered / attrs.max)) + 'px, ' + height + 'px, 0)');
+          clipProgress(height, width);
         }
       });
       

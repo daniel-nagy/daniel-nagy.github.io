@@ -1,11 +1,55 @@
 'use strict';
 
-angular.module('me').directive('mediaPlayer', function () {
+angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($album, $audio) {
   return {
     templateUrl: 'templates/media-player.html',
-    link: function (scope, element) {
+    link: function (scope, element, attrs) {
+      var progress = element.find('progress-linear');
       var scroll = element.find('scroll');
       var toolbar = scroll.previous();
+      
+      scope.audio = $audio;
+      
+      function oncanplaythrough() {
+        progress.one('animationiteration webkitAnimationIteration', function () {
+          scope.loading = undefined;
+          scope.$apply();
+        });
+      }
+      
+      function ondurationchange() {
+        scope.duration = $audio.duration();
+        scope.$apply();
+      }
+      
+      function onended() {
+        $audio.set(scope.album.nextTrack().title);
+        $audio.play();
+        scope.$apply();
+      }
+      
+      function onloadstart() {
+        scope.currentTime = 0;
+        scope.duration = 0;
+        scope.loading = true;
+        scope.$apply();
+      }
+      
+      function onprogress() {
+        scope.$apply();
+      }
+      
+      function onsuspend() {
+        progress.one('animationiteration webkitAnimationIteration', function () {
+          scope.loading = undefined;
+          scope.$apply();
+        });
+      }
+      
+      function ontimeupdate() {
+        scope.currentTime = $audio.currentTime();
+        scope.$apply();
+      }
       
       scroll.on('scroll', function () {
         if(scroll.prop('scrollTop') <= 0) {
@@ -14,60 +58,24 @@ angular.module('me').directive('mediaPlayer', function () {
           toolbar.addClass('elevated');
         }
       });
-    },
-    controller: ['$album', '$audio', '$attrs', '$element', '$scope', function ($album, $audio, $attrs, $element, $scope) {
-      $scope.audio = $audio;
       
-      $album($attrs.collectionId).then(function (album) {
-        $scope.album = album;
+      $album(attrs.collectionId).then(function (album) {
+        scope.album = album;
         
         if(!$audio.isSet()) {
-          $audio.set($scope.album.currentTrack().title);
+          $audio.set(scope.album.currentTrack().title);
+        } else {
+          scope.duration = $audio.duration();
+          scope.currentTime = $audio.currentTime();
         }
         
-        var progress = $element.find('progress-linear');
-        
-        $audio.on('loadstart', function () {
-          $scope.$apply(function () {
-            $scope.currentTime = 0;
-            $scope.duration = 0;
-            $scope.buffered = 0;
-            $scope.loading = true;
-          });
-        });
-        
-        $audio.on('progress', function () {
-          $scope.$apply($scope.buffered = $audio.buffered());
-        });
-        
-        $audio.on('canplaythrough', function () {
-          progress.one('animationiteration webkitAnimationIteration', function () {
-            $scope.$apply($scope.loading = undefined);
-          });
-        });
-        
-        $audio.on('suspend', function () {
-          progress.one('animationiteration webkitAnimationIteration', function () {
-            $scope.$apply($scope.loading = undefined);
-          });
-        });
-        
-        $audio.on('durationchange', function () {
-          $scope.$apply($scope.duration = $audio.duration());
-        });
-        
-        $audio.on('timeupdate', function () {
-          $scope.$apply($scope.currentTime = $audio.currentTime());
-        });
-        
-        $audio.on('ended', function () {
-          if($scope.album.hasNextTrack()) {
-            $scope.$apply(function () {
-              $audio.set($scope.album.nextTrack().title);
-              $audio.play();
-            });
-          }
-        });
+        $audio.on('canplaythrough', oncanplaythrough);
+        $audio.on('durationchange', ondurationchange);
+        $audio.on('ended', onended);
+        $audio.on('loadstart', onloadstart);
+        $audio.on('progress', onprogress);
+        $audio.on('suspend', onsuspend);
+        $audio.on('timeupdate', ontimeupdate);
         
         var pointerstart = progress.hasOwnProperty('ontouchstart') ? 'touchstart' : 'mousedown';
         
@@ -75,6 +83,9 @@ angular.module('me').directive('mediaPlayer', function () {
           $audio.setCurrentTime(event.offsetX * (progress.attr('max') / progress.prop('clientWidth')));
         });
       });
+      
+    },
+    controller: ['$scope', function ($scope) {
       
       $scope.selectTrack = function (track, index) {
         $scope.album.selectTrack(index);
@@ -119,7 +130,7 @@ angular.module('me').directive('mediaPlayer', function () {
       };
     }]
   };
-})
+}])
 
 .filter('zeroPad', function () {
   return function (input) {

@@ -90,14 +90,12 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
       if(itunesLookup) {
         albums[collectionId] = new Album(itunesLookup.results.shift(), itunesLookup.results);
         defer.resolve(albums[collectionId]);
-      }
-      
-      else {
+      } else {
         $http.jsonp('https://itunes.apple.com/lookup', {
           params: {
             'callback': 'JSON_CALLBACK',
             'id': collectionId,
-            'country': 'nz',
+            'country': 'us',
             'entity': 'song'
           }
         }).success(function (data) {
@@ -107,6 +105,7 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
         });
       }
     }
+    
     return defer.promise;
   };
   

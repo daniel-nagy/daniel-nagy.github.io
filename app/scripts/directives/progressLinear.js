@@ -21,7 +21,11 @@ angular.module('me').directive('progressLinear', function () {
       });
       
       attrs.$observe('value', function () {
-        bar.css('width', ((attrs.value / attrs.max) * 100) + '%');
+        if(attrs.max > 0) {
+          bar.css('width', ((attrs.value / attrs.max) * 100) + '%');
+        } else {
+          bar.css('width', '0%');
+        }
       });
       
       

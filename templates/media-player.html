@@ -21,7 +21,7 @@
       </div>
     </media-controls>
     
-    <progress-linear ng-attr-indeterminate="{{loading}}" value="{{currentTime}}" max="{{duration}}" buffered="{{buffered}}"></progress-linear>
+    <progress-linear ng-attr-indeterminate="{{loading}}" max="{{duration}}" value="{{currentTime}}" buffered="{{audio.buffered()}}"></progress-linear>
     
   </media-toolbar>
   

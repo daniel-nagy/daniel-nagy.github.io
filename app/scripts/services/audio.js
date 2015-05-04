@@ -2,7 +2,6 @@
 
 angular.module('me').factory('$audio', function () {
   var audio;
-  var base = 'media/Babel/';
   
   return {
     buffered: function () {
@@ -58,10 +57,10 @@ angular.module('me').factory('$audio', function () {
     },
     set: function (title) {
       if(audio) {
-        audio.src = base + title + '.m4a';
+        audio.src = 'media/Wilder Mind/' + title + '.m4a';
         audio.load();
       } else {
-        audio = new Audio(base + title + '.m4a');
+        audio = new Audio('media/Wilder Mind/' + title + '.m4a');
       }
     },
     setCurrentTime: function (time) {

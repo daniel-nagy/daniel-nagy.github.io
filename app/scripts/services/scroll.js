@@ -2,7 +2,9 @@
 
 angular.module('me').factory('$scroll', ['$q', function ($q) {
   
-  return function (element, from, to, duration) {
+  var cache = {};
+  
+  function scroll(element, from, to, duration) {
     
     duration = duration || 500; // miliseconds (0.5 seconds)
     
@@ -45,6 +47,16 @@ angular.module('me').factory('$scroll', ['$q', function ($q) {
     var animationInterval = setInterval(animateScroll, 16);
     
     return defer.promise;
+  }
+  
+  return {
+    remember: function (page, position) {
+      cache[page] = position;
+    },
+    position: function (page) {
+      return cache.hasOwnProperty(page) ? cache[page] : 0;
+    },
+    scroll: scroll
   };
   
 }]);

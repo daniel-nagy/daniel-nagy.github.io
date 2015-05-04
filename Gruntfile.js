@@ -77,6 +77,12 @@ module.exports = function(grunt) {
         }, {
           expand: true,
           flatten: true,
+          cwd: 'bower_components/angular-resource/',
+          src: ['angular-resource.min.js', 'angular-resource.min.js.map'],
+          dest: 'production/angular'
+        }, {
+          expand: true,
+          flatten: true,
           cwd: 'bower_components/angular-route/',
           src: ['angular-route.min.js', 'angular-route.min.js.map'],
           dest: 'production/angular'

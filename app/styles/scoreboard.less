@@ -1,6 +1,8 @@
 .scoreboard {
   padding: 0;
   margin: 32px 0 16px;
+  border-radius: 2px;
+  overflow: hidden;
   
   .secondary {
     font-size: 14px;
@@ -10,9 +12,16 @@
   header {
     padding: 16px;
     border-bottom: 1px @divider solid;
+    background-color: @primary;
+    color: #fff;
     
     > .team-name {
       font-size: 18px;
+      font-weight: 500;
+    }
+    
+    > .secondary {
+      color: rgba(255, 255, 255, 0.85);
       font-weight: 500;
     }
   }

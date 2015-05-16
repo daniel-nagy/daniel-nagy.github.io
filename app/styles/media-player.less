@@ -2,6 +2,11 @@ media-player {
   display: flex;
   .elevate();
   
+  &[rounded] {
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
   .artist, .title, .track-title {
     flex: 0 1 auto;
     .overflow-ellipsis();

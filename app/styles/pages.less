@@ -28,9 +28,17 @@ section {
     font-weight: 300;
   }
   
+  > .subsection {
+    margin-top: 32px;
+  }
+  
   > p {
-    margin: 16px 0;
+    margin: 16px 0 0;
     line-height: 1.5;
+    
+    &:last-of-type:not(:last-child) {
+      margin-bottom: 16px;
+    }
   }
   
   > *:last-child {

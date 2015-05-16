@@ -57,10 +57,10 @@ angular.module('me').factory('$audio', function () {
     },
     set: function (title) {
       if(audio) {
-        audio.src = 'media/Wilder Mind/' + title + '.m4a';
+        audio.src = 'media/A Fever You Can\'t Sweat Out/' + title + '.m4a';
         audio.load();
       } else {
-        audio = new Audio('media/Wilder Mind/' + title + '.m4a');
+        audio = new Audio('media/A Fever You Can\'t Sweat Out//' + title + '.m4a');
       }
     },
     setCurrentTime: function (time) {

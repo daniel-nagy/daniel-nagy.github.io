@@ -6,6 +6,9 @@ angular.module('me', ['ngAnimate', 'ngResource', 'ngRoute'])
   $routeProvider.when('/about', {
     templateUrl: 'templates/about.html',
     title: 'About Me',
+  }).when('/unprofessional', {
+    templateUrl: 'templates/unprofessional.html',
+    title: 'Unprofessional',
   }).when('/projects', {
     templateUrl: 'templates/projects.html',
     title: 'Projects',

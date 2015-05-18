@@ -22,12 +22,6 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
         scope.$apply();
       }
       
-      function onended() {
-        $audio.set(scope.album.nextTrack().title);
-        $audio.play();
-        scope.$apply();
-      }
-      
       function onloadstart() {
         scope.currentTime = 0;
         scope.duration = 0;
@@ -51,6 +45,15 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
         scope.$apply();
       }
       
+      function cleanUp() {
+        $audio.off('canplaythrough', oncanplaythrough);
+        $audio.off('durationchange', ondurationchange);
+        $audio.off('loadstart', onloadstart);
+        $audio.off('progress', onprogress);
+        $audio.off('suspend', onsuspend);
+        $audio.off('timeupdate', ontimeupdate);
+      }
+      
       scroll.on('scroll', function () {
         if(scroll.prop('scrollTop') <= 0) {
           toolbar.removeClass('elevated');
@@ -62,16 +65,21 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
       $album(attrs.collectionId).then(function (album) {
         scope.album = album;
         
-        if(!$audio.isSet()) {
-          $audio.set(scope.album.currentTrack().title);
-        } else {
+        if($audio.isSet()) {
           scope.duration = $audio.duration();
           scope.currentTime = $audio.currentTime();
+        } else {
+          $audio.set(scope.album.currentTrack().title);
+          $audio.on('ended', function () {
+            if(album.hasNextTrack()) {
+              $audio.set(album.nextTrack().title);
+              $audio.play();
+            }
+          });
         }
         
         $audio.on('canplaythrough', oncanplaythrough);
         $audio.on('durationchange', ondurationchange);
-        $audio.on('ended', onended);
         $audio.on('loadstart', onloadstart);
         $audio.on('progress', onprogress);
         $audio.on('suspend', onsuspend);
@@ -83,6 +91,8 @@ angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($al
           $audio.setCurrentTime(event.offsetX * (progress.attr('max') / progress.prop('clientWidth')));
         });
       });
+      
+      scope.$on('$destroy', cleanUp);
       
     },
     controller: ['$scope', function ($scope) {

@@ -27,6 +27,11 @@ angular.module('me').factory('$audio', function () {
     isSet: function () {
       return audio ? true : false;
     },
+    off: function (target, callback) {
+      if(this.isSet()) {
+        audio.removeEventListener(target, callback);
+      }
+    },
     on: function (target, callback) {
       if(this.isSet()) {
         audio.addEventListener(target, callback);

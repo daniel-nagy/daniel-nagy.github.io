@@ -44,11 +44,11 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
   };
   
   Album.prototype.nextTrack = function () {
-    return this._current < this.trackCount - 1 ? this.tracks[++this._current] : null;
+    return this.hasNextTrack() ? this.tracks[++this._current] : null;
   };
   
   Album.prototype.previousTrack = function () {
-    return this._current > 0 ? this.tracks[--this._current] : null;
+    return this.hasPreviousTrack() ? this.tracks[--this._current] : null;
   };
   
   Album.prototype.selectTrack = function (index) {

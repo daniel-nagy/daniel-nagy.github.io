@@ -1,23 +1,21 @@
-scroll.view {
-  display: flex;
-  position: relative;
-}
-
 [ng-view] {
-  position: absolute;
-  left: 0; right: 0;
-  background-color: #fff;
-  z-index: 0 !important;
-
-  .min-width(@screen-gt-sm, {
-    margin: 32px auto;
-    padding: 0 24px;
-    width: 75%;
-    
-    .elevate();
-  });
-
+  width: 100%;
+  max-width: 896px;
+  
+  > * {
+    max-width: 896px;
+    margin: 32px;
+  }
+  
   .max-width(@screen-sm, {
-    padding: 0 16px;
+    > *:not(card) {
+      margin: 16px;
+    }
+    
+    > card {
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
   });
 }

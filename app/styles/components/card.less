@@ -1,13 +1,17 @@
 card {
   display: block;
   background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
   .elevate();
   
   .min-width(@screen-gt-sm, {
+    margin: 16px;
     padding: 24px;
   });
   
   .max-width(@screen-sm, {
+    margin: 8px;
     padding: 16px;
   });
 }

@@ -9,6 +9,9 @@ angular.module('me', ['ngAnimate', 'ngResource', 'ngRoute'])
   }).when('/unprofessional', {
     templateUrl: 'templates/unprofessional.html',
     title: 'Unprofessional',
+  }).when('/blog-posts', {
+    templateUrl: 'templates/blog-posts.html',
+    title: 'Blog Posts',
   }).when('/projects', {
     templateUrl: 'templates/projects.html',
     title: 'Projects',

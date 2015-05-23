@@ -4,14 +4,21 @@
   color: @primary;
 
   .min-width(@screen-gt-sm, {
-    margin-top: 48px;
-    margin-bottom: -24px;
-    font-size: 24px;
+    padding-top: 16px;
   });
 
   .max-width(@screen-sm, {
-    margin-top: 32px;
-    margin-bottom: -16px;
+    margin-top: 8px;
+  });
+}
+
+.lead + section {
+  .min-width(@screen-gt-sm, {
+    padding-top: 16px;
+  });
+  
+  .max-width(@screen-sm, {
+    padding-top: 8px;
   });
 }
 
@@ -58,8 +65,8 @@ section {
   }
 
   .min-width(@screen-gt-sm, {
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding-top: 48px;
+    padding-bottom: 48px;
     
     > img {
       max-width: 75%;
@@ -68,12 +75,32 @@ section {
   });
 
   .max-width(@screen-sm, {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 32px;
+    padding-bottom: 32px;
     
     > img {
       max-width: 100%;
       margin: 16px 0;
+    }
+  });
+}
+
+card > section {
+  .min-width(@screen-gt-sm, {
+    &:first-child {
+      padding-top: 24px;
+    }
+    &:last-child {
+      padding-bottom: 24px;
+    }
+  });
+  
+  .max-width(@screen-sm, {
+    &:first-child {
+      padding-top: 16px;
+    }
+    &:last-child {
+      padding-bottom: 16px;
     }
   });
 }

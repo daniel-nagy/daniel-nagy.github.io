@@ -1,0 +1,45 @@
+tabs {
+  display: flex;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  
+  tab {
+    display: flex;
+    align-items: center;
+    
+    height: 48px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: @primary;
+    z-index: 1;
+    
+    &:hover {
+      cursor: pointer;
+    }
+    
+    &:focus {
+      outline: 0;
+    }
+  }
+  
+  indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: @primary;
+    transition: width 0.3s ease-in, left 0.3s ease-out;
+  }
+  
+  &.primary {
+    background-color: @primary;
+    > tab {
+      color: #fff;
+    }
+    > indicator {
+      background-color: #fff;
+    }
+  }
+}

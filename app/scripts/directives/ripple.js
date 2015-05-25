@@ -8,11 +8,11 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
         'overflow': 'hidden'
       });
       
-      var style = window.getComputedStyle(element.first());
+      var style = window.getComputedStyle(element.getDomElement());
       
       function getInk(event) {
         var ink = angular.element('<ink></ink>');
-        var rect = element.first().getBoundingClientRect();
+        var rect = element.getDomElement().getBoundingClientRect();
         var diameter = Math.max(rect.height, rect.width);
         
         ink.css({
@@ -32,7 +32,7 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
         }).finally(scope.$apply());
       }
       
-      if(element.first().hasOwnProperty('ontouchstart')) {
+      if(element.getDomElement().hasOwnProperty('ontouchstart')) {
         
         var touchMove;
         
@@ -86,6 +86,17 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
 }])
 
 .directive('a', ['rippleDirective', function (rippleDirective) {
+  var ripple = rippleDirective.first();
+  return {
+    link: function (scope, element, attrs) {
+      if(attrs.noInk === undefined) {
+        ripple.link.apply(ripple, arguments);
+      }
+    }
+  };
+}])
+
+.directive('tab', ['rippleDirective', function (rippleDirective) {
   var ripple = rippleDirective.first();
   return {
     link: function (scope, element, attrs) {

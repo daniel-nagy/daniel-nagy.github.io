@@ -10,7 +10,7 @@ angular.module('me').factory('$backdrop', ['$animate', function ($animate) {
       var animation = $animate.enter(backdrop, document.body);
       
       animation.then(function () {
-        if(backdrop.first().hasOwnProperty('ontouchmove')) {
+        if(backdrop.getDomElement().hasOwnProperty('ontouchmove')) {
           // prevent scroll in mobile safari
           backdrop.on('touchmove', function (event) {
             event.preventDefault();

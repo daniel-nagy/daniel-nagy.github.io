@@ -1,0 +1,101 @@
+form {
+  margin: 0 -8px;
+}
+
+input-container {
+  position: relative;
+  display: flex;
+  margin: 0 8px;
+  padding-top: 24px;
+  
+  > label {
+    position: absolute;
+    left: 2px;
+    top: 29px;
+    color: @disabled;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+    transition-property: top, font-size, color;
+    
+    & + input,
+    & + textarea {
+      &::-webkit-input-placeholder {
+        opacity: 0;
+      }
+      &::-moz-placeholder {
+        opacity: 0;
+      }
+      &:-ms-input-placeholder {
+        opacity: 0;
+      }
+    }
+    
+    &:hover {
+      cursor: text;
+    }
+    
+    &.disable {
+      transition: none;
+    }
+  }
+  
+  > input,
+  > textarea {
+    margin: 0;
+    padding: 4px 2px;
+    height: 20px;
+    line-height: 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px @divider solid;
+    font-size: 16px;
+    transition: border-bottom-color 0.2s linear;
+    
+    &::-webkit-input-placeholder {
+      color: @disabled;
+    }
+    &::-moz-placeholder {
+      color: @disabled;
+    }
+    &:-ms-input-placeholder {
+      color: @disabled;
+    }
+  }
+  
+  > input {
+    text-overflow: ellipsis;
+  }
+  
+  > textarea {
+    resize: none;
+    width: 100%;
+  }
+  
+  > input:focus,
+  > textarea:focus {
+    outline: 0;
+  }
+}
+
+input-container.primary {
+  > input:focus,
+  > textarea:focus {
+    border-bottom-color: @primary;
+  }
+  
+  &.active > label {
+    color: @primary;
+  }
+}
+
+input-container.has-value > label {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  top: 12px;
+}
+
+input-container.active > label {
+  font-size: 12px;
+  top: 12px;
+}

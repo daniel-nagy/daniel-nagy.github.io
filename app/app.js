@@ -1,8 +1,21 @@
 'use strict';
 
-angular.module('me', ['ngAnimate', 'ngResource', 'ngRoute'])
+angular.module('me', [
+  'hc.marked',
+  'ngAnimate',
+  'ngResource',
+  'ngRoute',
+  'ngSanitize',
+  'ui.gravatar'
+])
 
-.config(['$routeProvider', function ($routeProvider) {
+.config(['markedProvider', '$routeProvider', function (markedProvider, $routeProvider) {
+  markedProvider.setOptions({
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value;
+    }
+  });
+  
   $routeProvider.when('/about', {
     templateUrl: 'templates/about.html',
     title: 'About Me',
@@ -11,6 +24,15 @@ angular.module('me', ['ngAnimate', 'ngResource', 'ngRoute'])
     title: 'Unprofessional',
   }).when('/blog-posts', {
     templateUrl: 'templates/blog-posts.html',
+    title: 'Blog Posts',
+  }).when('/blog-posts/user-experience', {
+    templateUrl: 'templates/posts/user-experience.html',
+    controller: 'PostController',
+    resolve: {
+      post: ['$post', function ($post) {
+        return $post.get({title: 'User Experience'});
+      }]
+    },
     title: 'Blog Posts',
   }).when('/projects', {
     templateUrl: 'templates/projects.html',
@@ -31,8 +53,17 @@ angular.module('me', ['ngAnimate', 'ngResource', 'ngRoute'])
     $rootScope.title = current.title ? current.title : undefined;
   });
   
-  angular.element.prototype.first = function () {
+  angular.element.prototype.getDomElement = function () {
     return this[0];
+  };
+  
+  angular.element.prototype.isEmpty = function () {
+    for(var prop in this) {
+      if(this.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+    return true;
   };
   
   angular.element.prototype.previous = function () {

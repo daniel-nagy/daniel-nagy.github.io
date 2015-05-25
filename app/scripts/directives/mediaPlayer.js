@@ -2,7 +2,7 @@
 
 angular.module('me').directive('mediaPlayer', ['$album', '$audio', function ($album, $audio) {
   return {
-    templateUrl: 'templates/media-player.html',
+    templateUrl: 'templates/components/media-player.html',
     link: function (scope, element, attrs) {
       var progress = element.find('progress-linear');
       var scroll = element.find('scroll');

@@ -1,21 +1,26 @@
-[ng-view] {
+.view-container {
   width: 100%;
-  max-width: 896px;
+  max-width: 912px;
   
-  > * {
-    max-width: 896px;
-    margin: 32px;
+  > [ng-view] {
+    max-width: 912px;
+    background-color: #fff;
   }
   
-  .max-width(@screen-sm, {
-    > *:not(card) {
-      margin: 16px;
+  .min-width(@screen-gt-sm, {
+    > [ng-view] {
+      margin: 24px;
+      padding: 0 24px;
+      border-radius: 2px;
+      .elevate();
+      z-index: 0;
     }
-    
-    > card {
+  });
+  
+  .max-width(@screen-sm, {
+    > [ng-view] {
       margin: 0;
-      border-radius: 0;
-      box-shadow: none;
+      padding: 0 16px;
     }
   });
 }

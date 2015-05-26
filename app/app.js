@@ -5,11 +5,15 @@ angular.module('me', [
   'ngAnimate',
   'ngResource',
   'ngRoute',
-  'ngSanitize',
-  'ui.gravatar'
+  'ngSanitize'
 ])
 
 .config(['markedProvider', '$routeProvider', function (markedProvider, $routeProvider) {
+  
+  hljs.configure({
+    tabReplace: '  ',
+  });
+  
   markedProvider.setOptions({
     highlight: function (code) {
       return hljs.highlightAuto(code).value;

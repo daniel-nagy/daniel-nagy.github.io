@@ -1,17 +1,8 @@
-comments {
-  display: block;
-  margin-top: 32px;
+comment {
+  padding-top: 16px;
   
-  comment + comment {
-    padding-top: 16px;
-  }
-  
-  > card {
-    margin: 32px 0;
-    
-    .card-content {
-      padding-top: 8px !important;
-    }
+  &:first-of-type {
+    padding-top: 32px;
   }
   
   img {
@@ -42,9 +33,41 @@ comments {
   .body {
     color: @secondary-text;
     padding-bottom: 16px;
+    
+    &[marked] {
+      > *:first-child {
+        margin-top: 0;
+      }
+      
+      > *:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
   
-  > comment actions {
+  actions {
     margin: 0 -12px;
+  }
+}
+
+tabs.comment-composer {
+  margin-top: 32px;
+}
+
+form[name="compose.form"] {
+  padding: 8px 16px 0px;
+  
+  > actions {
+    z-index: 1;
+    margin: 0 -4px;
+    padding: 16px 0 6px;
+  }
+}
+
+comment.preview {
+  padding: 32px 16px;
+  
+  .body {
+    padding-bottom: 0;
   }
 }

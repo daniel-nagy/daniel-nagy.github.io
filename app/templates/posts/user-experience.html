@@ -6,66 +6,54 @@
   
   <div class="heading">Comments</div>
   
-  <comments>
-    
-    <card>
-      <toolbar layout="column" align-items="flex-start" class="primary elevate">
-        <tools>
-          <div>Leave a Comment</div>
-        </tools>
-        <tabs>
-          <tab ng-click="switchView('compose')">Compose</tab>
-          <tab ng-click="switchView('preview')">Preview</tab>
-        </tabs>
-      </toolbar>
-      <div ng-if="view === 'compose'" class="card-content">
-        <form name="blah" method="post">
-          <div layout="row" wrap>
-            <input-container class="primary">
-              <label for="author">Author</label>
-              <input name="author" type="text" ng-model="compose.author" placeholder="Name">
-            </input-container>
-            <input-container class="primary">
-              <label for="email">Email</label>
-              <input name="email" type="text" ng-model="compose.email" placeholder="Email">
-            </input-container>
-          </div>
+  <tabs class="primary elevate comment-composer" ng-controller="comment">
+    <tab label="Compose">
+      <form layout="column" flex grow="1" shrink="1" name="compose.form" method="post">
+        <div layout="row" wrap>
           <input-container class="primary">
-            <label for="body">Comment</label>
-            <textarea name="body" type="text" ng-model="compose.body" placeholder="Comment"></textarea>
+            <label for="author">Author</label>
+            <input name="author" type="text" ng-model="compose.author" placeholder="Name">
           </input-container>
-        </form>
-      </div>
-      <div ng-if="view === 'preview'" class="card-content">
-        <comment layout="row">
-          <img gravatar-src-once="compose.email" gravatar-size="60"></img>
-          <div layout="column">
-            <div layout="column" justify-content="center" class="header">
-              <div class="author">{{compose.author || 'Anonymous'}}</div>
-              <div class="date">just now</div>
-            </div>
-            <div class="body" marked="compose.body"></div>
-          </div>
-        </comment>
-      </div>
-      <actions justify-content="flex-end">
-        <button class="primary">Comment</button>
-      </actions>
-    </card>
-    
-    <comment layout="row" ng-repeat="comment in post.comments">
-      <img gravatar-src-once="comment.email" gravatar-size="60"></img>
-      <div layout="column">
-        <div layout="column" justify-content="center" class="header">
-          <div class="author">{{comment.author}}</div>
-          <div class="date">{{comment.date | span}}</div>
+          <input-container class="primary">
+            <label for="email">Email</label>
+            <input name="email" type="text" ng-model="compose.email" ng-change="getHash()" placeholder="Email">
+          </input-container>
         </div>
-        <div class="body">{{comment.body}}</div>
-        <actions layout="row">
-          <button class="primary">Reply</button>
+        <input-container class="primary">
+          <label for="body">Comment</label>
+          <textarea name="body" type="text" ng-model="compose.body" placeholder="Comment"></textarea>
+        </input-container>
+        <actions layout="row" justify-content="flex-end">
+          <button class="primary">Comment</button>
         </actions>
+      </form>
+    </tab>
+    <tab label="Preview">
+      <comment layout="row" class="preview">
+        <img ng-src="{{gravatar || 'media/anonymous.svg'}}" fallback="media/anonymous.svg"></img>
+        <div layout="column">
+          <div layout="column" justify-content="center" class="header">
+            <div class="author">{{compose.author || 'Anonymous'}}</div>
+            <div class="date">just now</div>
+          </div>
+          <div class="body" marked="compose.body"></div>
+        </div>
+      </comment>
+    </tab>
+  </tabs>
+  
+  <comment layout="row" ng-repeat="comment in post.comments">
+    <img ng-src="{{gravatars[$index]}}" fallback="media/anonymous.svg"></img>
+    <div layout="column">
+      <div layout="column" justify-content="center" class="header">
+        <div class="author">{{comment.author}}</div>
+        <div class="date">{{comment.date | span}}</div>
       </div>
-    </comment>
-    
-  </comments>
+      <div class="body" marked="comment.body"></div>
+      <actions layout="row">
+        <button class="primary">Reply</button>
+      </actions>
+    </div>
+  </comment>
+
 </section>

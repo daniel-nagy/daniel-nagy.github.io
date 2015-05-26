@@ -46,7 +46,7 @@ angular.module('me').directive('inputContainer', ['$window', function ($window) 
           label.removeClass('disable');
         }
         
-        if(input.prop('nodeName') === "TEXTAREA") {
+        if(input.prop('nodeName') === 'TEXTAREA') {
           setTextAreaHeight();
         }
       });

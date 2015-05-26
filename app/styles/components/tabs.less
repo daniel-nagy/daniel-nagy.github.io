@@ -1,45 +1,102 @@
 tabs {
   display: flex;
+  flex-direction: column;
   position: relative;
-  border-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   overflow: hidden;
   
-  tab {
+  &.elevate {
+    .elevate();
+  }
+  
+  tab-container {
     display: flex;
-    align-items: center;
+    flex: 0 0 auto;
+    position: relative;
     
-    height: 48px;
-    padding: 0 16px;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: @primary;
-    z-index: 1;
-    
-    &:hover {
-      cursor: pointer;
+    &:not(:only-child) {
+      .elevate();
     }
     
-    &:focus {
-      outline: 0;
+    tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      height: 48px;
+      padding: 0 16px;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: @primary;
+      z-index: 1;
+      
+      &:hover {
+        cursor: pointer;
+      }
+      
+      &:focus {
+        outline: 0;
+      }
+    }
+    
+    indicator {
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      background-color: @primary;
+      
+      &.animate {
+        transition: width 0.3s ease-in, left 0.3s ease-out;
+      }
     }
   }
   
-  indicator {
-    position: absolute;
-    bottom: 0;
-    height: 2px;
+  &.primary tab-container {
     background-color: @primary;
-    transition: width 0.3s ease-in, left 0.3s ease-out;
-  }
-  
-  &.primary {
-    background-color: @primary;
-    > tab {
+    
+    tab {
       color: #fff;
     }
-    > indicator {
+    indicator {
       background-color: #fff;
+    }
+  }
+  
+  &.round-bottom {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+  
+  .tab-view {
+    display: flex;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    transition: transform 0.5s ease-out;
+    
+    &.ng-leave {
+      position: absolute;
+      top: 48px;
+    }
+    
+    &.ng-enter {
+      transform: translateX(-100%);
+    }
+    
+    &.ng-leave,
+    &.ng-enter.ng-enter-active {
+      transform: translateX(0);
+    }
+    
+    &.ng-leave.ng-leave-active {
+      transform: translateX(100%);
     }
   }
 }

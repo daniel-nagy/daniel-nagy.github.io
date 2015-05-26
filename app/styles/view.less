@@ -5,6 +5,7 @@
   > [ng-view] {
     max-width: 912px;
     background-color: #fff;
+    z-index: 0 !important;
   }
   
   .min-width(@screen-gt-sm, {
@@ -13,7 +14,6 @@
       padding: 0 24px;
       border-radius: 2px;
       .elevate();
-      z-index: 0;
     }
   });
   

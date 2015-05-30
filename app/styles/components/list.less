@@ -28,21 +28,27 @@ list {
       content: '';
     }
     
-    icon, [icon] {
+    i {
       margin-right: 8px;
-      fill: @secondary-text;
-      transition: fill 0.5s;
+    }
+    
+    img.avatar {
+      flex: 0 0 auto;
+      margin: 16px 0 16px 16px;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
     }
     
     content {
-      flex: 1 0 auto;
+      flex: 1 1 auto;
       
       display: block;
-      text-align: left;
       padding: 15px 16px;
+      line-height: 20px;
+      text-align: left;
       
       > * + * {
-        margin-top: 4px;
         font-size: 14px;
       }
       
@@ -51,15 +57,14 @@ list {
       }
     }
     
-    &.active {
+    &.active,
+    &.active i {
       color: @primary;
-      
-      icon, [icon] {
-        fill: @primary;
-      }
     }
     
-    transition: color 0.5s;
+    &, i {
+      transition: color 0.5s;
+    }
   }
   
   &[icon-list] > item, &[icon-list] > [item] {

@@ -1,7 +1,11 @@
 <tools flex grow="1">
-  <button icon src="icons/menu.svg" ng-click="toggleLeftDrawer()"></button>
+  <button class="icon" ng-click="toggleLeftDrawer()">
+    <i class="material-icons">menu</i>
+  </button>
   <div class="title">{{title}}</div>
 </tools>
 <tools flex justify-content="flex-end">
-  <button icon src="icons/more-vertical.svg" hide-gt-lg ng-click="toggleRightDrawer()"></button>
+  <button class="icon more_vert" hide-gt-lg ng-click="toggleRightDrawer()">
+    <i class="material-icons">more_vert</i>
+  </button>
 </tools>

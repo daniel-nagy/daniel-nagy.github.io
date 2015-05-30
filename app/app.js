@@ -1,24 +1,13 @@
 'use strict';
 
 angular.module('me', [
-  'hc.marked',
   'ngAnimate',
   'ngResource',
   'ngRoute',
   'ngSanitize'
 ])
 
-.config(['markedProvider', '$routeProvider', function (markedProvider, $routeProvider) {
-  
-  hljs.configure({
-    tabReplace: '  ',
-  });
-  
-  markedProvider.setOptions({
-    highlight: function (code) {
-      return hljs.highlightAuto(code).value;
-    }
-  });
+.config(['$routeProvider', function ($routeProvider) {
   
   $routeProvider.when('/about', {
     templateUrl: 'templates/about.html',
@@ -50,8 +39,6 @@ angular.module('me', [
 }])
 
 .run(['$rootScope', function ($rootScope) {
-  
-  $rootScope.title = 'Me';
   
   $rootScope.$on('$routeChangeSuccess', function (event, current) {
     $rootScope.title = current.title ? current.title : undefined;

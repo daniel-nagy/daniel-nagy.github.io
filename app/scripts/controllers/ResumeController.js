@@ -5,7 +5,7 @@ angular.module('me').controller('ResumeController', ['$dialog', '$scope', functi
   $scope.showResume = function () {
     $dialog.show({
       clickOutsideToClose: true,
-      templateUrl: 'templates/resume-dialog.html'
+      templateUrl: 'templates/dialogs/resume-dialog.html'
     });
   };
   

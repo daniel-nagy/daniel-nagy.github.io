@@ -6,7 +6,7 @@
   "freeze": true,
   "globals": {
     "angular": false,
-    "hljs": false
+    "Prism": false
   },
   "indent": 2,
   "newcap": true,

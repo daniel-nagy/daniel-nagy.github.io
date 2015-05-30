@@ -8,7 +8,8 @@
     
     <title ng-bind="title">Me</title>
     
-    <link href="highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"> -->
+    <link href="prism/themes/prism.css" rel="stylesheet" type="text/css">
     
     <!-- production:css style.min.css -->
     <link href="styles/style.css" rel="stylesheet" type="text/css">
@@ -31,19 +32,12 @@
     
     <drawer id="right" full lock-open="gt-lg" ng-include="'templates/components/right-drawer.html'" ng-controller="RightDrawerController" ng-cloak></drawer>
     
-    
-    <!-- production:[src] highlight/ -->
-    <script type="text/javascript" src="highlight/highlight.pack.js"></script>
-    <!-- /production -->
-    
-    <!-- production:[src] marked/ -->
     <script type="text/javascript" src="marked/marked.min.js"></script>
-    <!-- /production -->
+    <script type="text/javascript" src="prism/prism.js" data-manual></script>
     
     <!-- production:[src] angular/ -->
     <script type="text/javascript" src="angular/angular.min.js"></script>
     <script type="text/javascript" src="angular-animate/angular-animate.min.js"></script>
-    <script type="text/javascript" src="angular-marked/angular-marked.min.js"></script>
     <script type="text/javascript" src="angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="angular-sanitize/angular-sanitize.min.js"></script>
@@ -57,23 +51,24 @@
     <script type="text/javascript" src="scripts/controllers/ResumeController.js"></script>
     <script type="text/javascript" src="scripts/controllers/RightDrawerController.js"></script>
     <script type="text/javascript" src="scripts/controllers/ToolbarController.js"></script>
-    <script type="text/javascript" src="scripts/directives/comments.js"></script>
     <script type="text/javascript" src="scripts/directives/drawer.js"></script>
-    <script type="text/javascript" src="scripts/directives/fallback.js"></script>
+    <script type="text/javascript" src="scripts/directives/gravatar.js"></script>
     <script type="text/javascript" src="scripts/directives/flex.js"></script>
-    <script type="text/javascript" src="scripts/directives/icon.js"></script>
     <script type="text/javascript" src="scripts/directives/input.js"></script>
+    <script type="text/javascript" src="scripts/directives/marked.js"></script>
     <script type="text/javascript" src="scripts/directives/mediaPlayer.js"></script>
     <script type="text/javascript" src="scripts/directives/ngView.js"></script>
     <script type="text/javascript" src="scripts/directives/progressLinear.js"></script>
     <script type="text/javascript" src="scripts/directives/ripple.js"></script>
     <script type="text/javascript" src="scripts/directives/tabs.js"></script>
+    <script type="text/javascript" src="scripts/filters/age.js"></script>
     <script type="text/javascript" src="scripts/services/album.js"></script>
     <script type="text/javascript" src="scripts/services/audio.js"></script>
     <script type="text/javascript" src="scripts/services/backdrop.js"></script>
     <script type="text/javascript" src="scripts/services/dialog.js"></script>
     <script type="text/javascript" src="scripts/services/drawer.js"></script>
     <script type="text/javascript" src="scripts/services/md5.js"></script>
+    <script type="text/javascript" src="scripts/services/marked.js"></script>
     <script type="text/javascript" src="scripts/services/media.js"></script>
     <script type="text/javascript" src="scripts/services/post.js"></script>
     <script type="text/javascript" src="scripts/services/scroll.js"></script>

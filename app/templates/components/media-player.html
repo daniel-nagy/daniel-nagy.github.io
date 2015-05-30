@@ -11,13 +11,23 @@
     
     <media-controls>
       <div>
-        <button icon src="icons/previous.svg" ng-disabled="!album.hasPreviousTrack()" ng-click="selectPrevious()"></button>
-        <button icon src="{{audio.isPlaying() ? 'icons/pause.svg' : 'icons/play.svg'}}" ng-click="audio.isPlaying() ? audio.pause() : audio.play()"></button>
-        <button icon src="icons/next.svg" ng-disabled="!album.hasNextTrack()" ng-click="selectNext()"></button>
+        <button class="icon" ng-disabled="!album.hasPreviousTrack()" ng-click="selectPrevious()">
+          <i class="material-icons">skip_previous</i>
+        </button>
+        <button class="icon" ng-click="audio.isPlaying() ? audio.pause() : audio.play()">
+          <i class="material-icons">{{audio.isPlaying() ? 'pause_arrow' : 'play_arrow'}}</i>
+        </button>
+        <button class="icon" ng-disabled="!album.hasNextTrack()" ng-click="selectNext()">
+          <i class="material-icons">skip_next</i>
+        </button>
       </div>
       <div>
-        <button icon src="icons/shuffle.svg" ng-click="toggleShuffle()" ng-class="{active: album.isShuffled()}"></button>
-        <button icon src="icons/repeat.svg" ng-click="toggleRepeat()" ng-class="{active: audio.repeatEnabled()}"></button>
+        <button class="icon" ng-click="toggleShuffle()" ng-class="{active: album.isShuffled()}">
+          <i class="material-icons">shuffle</i>
+        </button>
+        <button class="icon" ng-click="toggleRepeat()" ng-class="{active: audio.repeatEnabled()}">
+          <i class="material-icons">repeat</i>
+        </button>
       </div>
     </media-controls>
     
@@ -36,7 +46,9 @@
       <div class="artist">{{album.artist}} &middot; {{album.release}}</div>
     </info>
     
-    <button icon src="icons/more-vertical.svg" ng-click="showTracks = !showTracks"></button>
+    <button class="icon" ng-click="showTracks = !showTracks">
+      <i class="material-icons">more_vert</i>
+    </button>
     
   </media-toolbar>
   
@@ -47,7 +59,7 @@
         <div class="number">{{track.number | zeroPad}}</div>
         <div class="title-container">
           <div class="track-title">{{track.title}}</div>
-          <icon ng-if="album._current === $index" src="{{audio.isPlaying() ? 'icons/volume-up.svg' : 'icons/volume-mute.svg'}}"></icon>
+          <i class="material-icons md-18" ng-if="album._current === $index">{{audio.isPlaying() ? 'volume_up' : 'volume_mute'}}</i>
         </div>
         <div class="duration">{{track.duration | playBack}}</div>
       </div>

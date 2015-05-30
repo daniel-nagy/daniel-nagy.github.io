@@ -9,9 +9,17 @@ button {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   
-  &:not([icon]) {
+  &:not([icon]):not(.icon) {
     margin: 0 4px;
     padding: 10px 8px;
+  }
+  
+  &.icon {
+    padding: 0;
+    
+    &.more_vert > i {
+      padding: 12px 6px;
+    }
   }
   
   &::-moz-focus-inner {
@@ -23,8 +31,13 @@ button {
     cursor: pointer;
   }
   
+  &[disabled] {
+    color: @disabled !important;
+    cursor: not-allowed;
+  }
+  
   &.primary {
-    color: @primary;
+    color: @dark;
   }
 }
 
@@ -46,5 +59,9 @@ a {
   &:not([no-ink]):not([icon]):not([item]) {
     margin: 0 4px;
     padding: 10px 8px;
+    
+    &.primary {
+      color: @dark;
+    }
   }
 }

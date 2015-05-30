@@ -151,24 +151,24 @@ module.exports = function(grunt) {
       }
     },
     
-    // compress icons
-    svgmin: {
-      options: {
-        plugins: [{
-          removeTitle: true
-        }, {
-          removeDesc: true
-        }]
-      },
-      production: {
-        files: [{
-          expand: true,
-          flatten: true,
-          src: 'app/icons/*.svg',
-          dest: 'production/icons/'
-        }]
-      }
-    },
+    // compress svg images
+    // svgmin: {
+    //   options: {
+    //     plugins: [{
+    //       removeTitle: true
+    //     }, {
+    //       removeDesc: true
+    //     }]
+    //   },
+    //   production: {
+    //     files: [{
+    //       expand: true,
+    //       flatten: true,
+    //       src: 'app/icons/*.svg',
+    //       dest: 'production/icons/'
+    //     }]
+    //   }
+    // },
     
     // minify scripts
     uglify: {
@@ -227,7 +227,6 @@ module.exports = function(grunt) {
   ]);
   
   grunt.registerTask('production', [
-    'svgmin:production',
     'less:production',
     'autoprefixer:production',
     'cssmin:production',

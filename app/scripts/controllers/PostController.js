@@ -1,19 +1,24 @@
 'use strict';
 
-angular.module('me').controller('PostController', ['$md5', 'post', '$post', '$scope', function ($md5, post, $post, $scope) {
+angular.module('me').controller('PostController', ['post', '$scope', function (post, $scope) {
   
-  post.$promise.then(function (post) {
-    $scope.post = post;
-    $scope.gravatars = [];
-    
-    post.comments.forEach(function(comment, index) {
-      $md5(comment.email)
-        .success(function (hash) {
-          $scope.gravatars[index] = 'http://www.gravatar.com/avatar/' + hash + '?s=60&d=404';
-        }).error(function () {
-          $scope.gravatars[index] = 'media/anonymous.svg';
-        });
-    });
+  post.$promise.then(function (data) {
+    $scope.compose = {};
+    $scope.post = data;
   });
+  
+  $scope.postComment = function() {
+    
+    var comment = {
+      author: $scope.compose.author || 'Anonymous',
+      body: $scope.compose.body,
+      email: $scope.compose.email
+    };
+    
+    $scope.post.comments.push(comment);
+    $scope.post.$save(function (data) {
+      console.log(data);
+    });
+  };
   
 }]);

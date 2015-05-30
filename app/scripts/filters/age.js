@@ -1,24 +1,6 @@
 'use strict';
 
-angular.module('me').controller('comment', ['$md5', '$scope', function ($md5, $scope) {
-  $scope.compose = {
-    author: '',
-    body: '',
-    email: ''
-  };
-  
-  $scope.getHash = function () {
-    if($scope.compose.email) {
-      $md5($scope.compose.email).success(function (hash) {
-        $scope.gravatar = 'http://www.gravatar.com/avatar/'+ hash + '?s=60&d=404'
-      });
-    } else {
-      $scope.gravatar = undefined;
-    }
-  };
-}])
-
-.filter('span', ['$filter', function ($filter) {
+angular.module('me').filter('age', ['$filter', function ($filter) {
   var now = new Date();
   
   function timeDifference(a, b) {

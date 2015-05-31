@@ -71,20 +71,19 @@ module.exports = function(grunt) {
           dest: 'production/angular'
         }, {
           expand: true,
-          flatten: true,
-          cwd: 'app/templates',
-          src: '**/*.html',
-          dest: 'production/templates/'
+          cwd: 'app',
+          src: 'templates/**/*',
+          dest: 'production'
         }, {
           expand: true,
           cwd: 'bower_components',
           src: 'material-design-icons/iconfont/!(README.md)',
-          dest: 'production/'
+          dest: 'production'
         }, {
           expand: true,
           cwd: 'app',
           src: 'media/**/*',
-          dest: 'production/'
+          dest: 'production'
         }]
       }
     },

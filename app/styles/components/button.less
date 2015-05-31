@@ -4,27 +4,25 @@ button {
   border-radius: 2px;
   outline: 0;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 14px;
+  font-weight: 500;
   color: inherit;
+  text-transform: uppercase;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   
-  &:not([icon]):not(.icon) {
+  &:not(.icon) {
     margin: 0 4px;
     padding: 10px 8px;
   }
   
   &.icon {
     padding: 0;
-    
-    &.more_vert > i {
-      padding: 12px 6px;
-    }
   }
   
   &::-moz-focus-inner {
     padding: 0;
-    border: 0
+    border: 0;
   }
   
   &:hover {
@@ -33,35 +31,10 @@ button {
   
   &[disabled] {
     color: @disabled !important;
-    cursor: not-allowed;
+    cursor: default;
   }
   
   &.primary {
     color: @dark;
-  }
-}
-
-a {
-  color: @text;
-  text-decoration: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
-  &[no-ink] {
-    color: @dark;
-    
-    &:hover {
-      color: @darker;
-      cursor: pointer;
-    }
-  }
-  
-  &:not([no-ink]):not([icon]):not([item]) {
-    margin: 0 4px;
-    padding: 10px 8px;
-    
-    &.primary {
-      color: @dark;
-    }
   }
 }

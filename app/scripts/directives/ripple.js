@@ -89,7 +89,7 @@ angular.module('me').directive('ripple', ['$animate', function ($animate) {
   var ripple = rippleDirective.first();
   return {
     link: function (scope, element, attrs) {
-      if(attrs.noInk === undefined) {
+      if(attrs.noInk === undefined && element.hasClass('button')) {
         ripple.link.apply(ripple, arguments);
       }
     }

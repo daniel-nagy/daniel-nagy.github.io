@@ -33,6 +33,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizelegibility;
   
+  > flex {
+    width: 100%;
+  }
+  
   .min-width(@screen-gt-sm, {
     background-color: darken(#fff, 6%);
   });
@@ -55,8 +59,9 @@ toolbar.collapse {
   transition: margin-top 0.35s;
 }
 
+@import "anchor";
 @import "backdrop";
-@import "comments";
+/* @import "comments"; */
 @import "layout";
 @import "left-drawer";
 @import "media-player";
@@ -71,11 +76,11 @@ toolbar.collapse {
 @import "components/dialog";
 @import "components/drawer";
 @import "components/icon";
-@import "components/input";
+/* @import "components/input"; */
 @import "components/ink";
 @import "components/list";
 @import "components/progress-linear";
-@import "components/tabs";
+/* @import "components/tabs"; */
 @import "components/toolbar";
 
 // mixins

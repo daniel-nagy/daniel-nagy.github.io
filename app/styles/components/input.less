@@ -6,12 +6,12 @@ input-container {
   position: relative;
   display: flex;
   margin: 0 8px;
-  padding-top: 24px;
+  padding-top: 28px;
   
   > label {
     position: absolute;
     left: 2px;
-    top: 29px;
+    top: 34px;
     color: @disabled;
     transition-duration: 0.1s;
     transition-timing-function: linear;
@@ -41,14 +41,15 @@ input-container {
   
   > input,
   > textarea {
-    margin: 0;
-    padding: 4px 2px;
+    margin: 0 0 8px 0;
+    padding: 8px 2px;
     height: 20px;
     line-height: 20px;
     border-top: 0;
     border-left: 0;
     border-right: 0;
     border-bottom: 1px @divider solid;
+    font-family: inherit;
     font-size: 16px;
     transition: border-bottom-color 0.2s linear;
     
@@ -60,6 +61,10 @@ input-container {
     }
     &:-ms-input-placeholder {
       color: @disabled;
+    }
+    
+    &:not(output):-moz-ui-invalid {
+      box-shadow: none;
     }
   }
   
@@ -92,10 +97,10 @@ input-container.primary {
 input-container.has-value > label {
   color: rgba(0, 0, 0, 0.7);
   font-size: 12px;
-  top: 12px;
+  top: 16px;
 }
 
 input-container.active > label {
   font-size: 12px;
-  top: 12px;
+  top: 16px;
 }

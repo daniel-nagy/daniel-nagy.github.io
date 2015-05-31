@@ -1,0 +1,56 @@
+<section flex grow="1" layout="column" justify-content="space-between">
+  <div class="heading">{{post.title}}</div>
+</section>
+
+<section ng-if="compose">
+  
+  <div class="heading">Comments</div>
+  
+  <tabs class="primary elevate comment-composer">
+    <tab label="Compose">
+      <form layout="column" flex grow="1" shrink="1" name="compose.form" ng-submit="postComment()">
+        <div layout="row" wrap>
+          <input-container class="primary">
+            <label for="author">Author</label>
+            <input name="author" type="text" ng-model="compose.author" placeholder="Name">
+          </input-container>
+          <input-container class="primary">
+            <label for="email">Email</label>
+            <input name="email" type="text" ng-model="compose.email" placeholder="Email">
+          </input-container>
+        </div>
+        <input-container class="primary">
+          <label for="body">Comment</label>
+          <textarea name="body" type="text" ng-model="compose.body" placeholder="Comment" required></textarea>
+        </input-container>
+        <actions layout="row" justify-content="flex-end">
+          <button type="submit" class="primary" ng-disabled="compose.form.$invalid">Comment</button>
+        </actions>
+      </form>
+    </tab>
+    <tab label="Preview" ng-disabled="compose.form.$invalid">
+      <list icon-list>
+        <item separate>
+          <img gravatar class="avatar" email="{{compose.email}}" fallback="media/account-circle.svg"></img>
+          <content>
+            <div>{{compose.author || 'Anonymous'}}</div>
+            <div>just now</div>
+            <div marked="{{compose.body}}"></div>
+          </content>
+        </item>
+      </list>
+    </tab>
+  </tabs>
+  
+  <list icon-list comment-list>
+    <item separate ng-repeat="comment in post.comments">
+      <img gravatar class="avatar" email="{{comment.email}}" fallback="media/account-circle.svg"></img>
+      <content>
+        <div>{{comment.author}}</div>
+        <div>{{comment.date | age}}</div>
+        <div marked="{{comment.body}}"></div>
+      </content>
+    </item>
+  </list>
+
+</section>

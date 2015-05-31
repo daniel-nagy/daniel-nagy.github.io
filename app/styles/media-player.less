@@ -26,11 +26,24 @@ media-player {
   
   media-toolbar {
     display: flex;
-    padding: 10px;
     
     button.icon {
+      
       ink {
         z-index: 0;
+      }
+      
+      .material-icons {
+        padding: 6px;
+        transition: color 0.5s;
+      }
+      
+      &:not(.active) .material-icons {
+        color: #fff;
+      }
+      
+      &.active .material-icons {
+        color: #FFFF00;
       }
     }
   }
@@ -40,18 +53,14 @@ media-player {
     
     button.icon {
       
-      i {
-        padding: 6px;
-      }
-      
       &[disabled] {
         cursor: default;
         pointer-events: none;
         opacity: 0.7;
       }
       
-      & + button[icon] {
-        margin-left: 10px;
+      & + button.icon {
+        margin-left: 12px;
       }
     }
   }
@@ -78,24 +87,12 @@ media-player {
       background-color: @primary;
       color: #fff;
       
-      button.icon {
-        transition: color 0.5s;
-        
-        &:not(.active) {
-          color: #fff;
-        }
-        
-        &.active {
-          color: #FFFF00;
-        }
-      }
-      
       > .now-playing {
         display: flex;
         justify-content: space-between;
         align-items: center;
         
-        padding: 6px 6px 10px;
+        padding: 16px 16px 8px;
         
         > .track-title {
           font-weight: 500;
@@ -110,6 +107,8 @@ media-player {
       media-controls {
         align-items: center;
         justify-content: space-between;
+        
+        padding: 0 6px 10px 5px;
         
         > div {
           display: flex;
@@ -151,7 +150,7 @@ media-player {
       }
       
       info {
-        padding: 6px;
+        padding: 16px;
         overflow: hidden;
       }
       
@@ -232,17 +231,28 @@ media-player {
     width: 288px;
     
     paper:first-of-type {
-      > media-toolbar {
-        padding-bottom: 4px;
+      > media-toolbar > media-controls {
+        padding-bottom: 0;
       }
     }
     
     paper:nth-of-type(2) {
       
       > media-toolbar {
-        padding-top: 0;
         background-color: @primary;
         color: #fff;
+        
+        > info {
+          padding: 8px 0 16px 16px;
+        }
+        
+        > button {
+          flex: 0 0 auto;
+          align-self: center;
+          height: 36px;
+          width: 36px;
+          margin: 0 6px 8px 12px;
+        }
       }
       
       > scroll {

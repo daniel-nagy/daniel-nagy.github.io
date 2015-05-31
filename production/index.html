@@ -8,27 +8,35 @@
     
     <title ng-bind="title">Me</title>
     
+    <!-- <link href="prism/themes/prism.css" rel="stylesheet" type="text/css"> -->
+    
     <link rel="stylesheet" href="style.min.css">
     
   </head>
   
   <body layout="row">
     
-    <drawer id="left" ng-include="'templates/left-drawer.html'" ng-controller="LeftDrawerController" ng-cloak></drawer>
+    <drawer id="left" ng-include="'templates/components/left-drawer.html'" ng-controller="LeftDrawerController" ng-cloak></drawer>
     
     <flex grow="1" shrink="1" layout="column">
-      <toolbar primary ng-include="'templates/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
-      <scroll flex grow="1" class="view">
-        <div ng-view ng-cloak></div>
+      <toolbar class="primary elevate" ng-include="'templates/components/toolbar.html'" ng-controller="ToolbarController" ng-cloak></toolbar>
+      <scroll flex grow="1" shrink="1" layout="column">
+        <flex grow="1" layout="column" align-self="center" class="view-container">
+            <flex grow="1" layout="column" ng-view></flex>
+        </flex>
       </scroll>
     </flex>
     
-    <drawer id="right" full lock-open="gt-lg" ng-include="'templates/right-drawer.html'" ng-controller="RightDrawerController" ng-cloak></drawer>
+    <drawer id="right" full lock-open="gt-lg" ng-include="'templates/components/right-drawer.html'" ng-controller="RightDrawerController" ng-cloak></drawer>
+    
+    <!-- <script type="text/javascript" src="marked/marked.min.js"></script> -->
+    <!-- <script type="text/javascript" src="prism/prism.js" data-manual></script> -->
     
     <script type="text/javascript" src="angular/angular.min.js"></script>
     <script type="text/javascript" src="angular/angular-animate.min.js"></script>
     <script type="text/javascript" src="angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="angular/angular-sanitize.min.js"></script>
     
     <script src="app.min.js"></script>
     

@@ -1,8 +1,11 @@
-<flex grow="1" layout="row" justify-content="flex-start" align-items="center">
-  <button icon src="icons/menu.svg" ng-click="toggleLeftDrawer()"></button>
+<tools flex grow="1">
+  <button class="icon" ng-click="toggleLeftDrawer()">
+    <i class="material-icons">menu</i>
+  </button>
   <div class="title">{{title}}</div>
-</flex>
-
-<flex grow="1" layout="row" justify-content="flex-end" align-items="center">
-  <button icon src="icons/more-vertical.svg" hide-gt-lg ng-click="toggleRightDrawer()"></button>
-</flex>
+</tools>
+<tools flex justify-content="flex-end">
+  <button class="icon" hide-gt-lg ng-click="toggleRightDrawer()">
+    <i class="material-icons more_vert">more_vert</i>
+  </button>
+</tools>

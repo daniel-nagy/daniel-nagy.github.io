@@ -24,9 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
   
-  margin: auto;
   padding: 12px;
   color: @secondary-text;
+  
+  &.more_vert {
+    padding: 12px 6px;
+  }
   
   &.md-18 { font-size: 18px; }
   &.md-36 { font-size: 36px; }
@@ -35,16 +38,4 @@
   &.md-dark.md-inactive {
     color: @disabled;
   }
-}
-
-icon, [icon] {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-backface-visibility: hidden;
-  
-  margin: 0;
-  padding: 12px;
-  fill: currentColor;
 }

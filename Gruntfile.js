@@ -25,8 +25,9 @@ module.exports = function(grunt) {
     
     // remove generated files
     clean: {
+      build: ['production/app.js', 'production/style.css'],
       development: 'app/styles/style.css',
-      production: ['production/app.js', 'production/style.css']
+      production: 'production/!(CNAME)'
     },
     
     // condense scripts into one file
@@ -65,39 +66,25 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           flatten: true,
-          cwd: 'bower_components/angular/',
-          src: ['angular.min.js', 'angular.min.js.map'],
+          cwd: 'bower_components',
+          src: 'angular*/*.min.js?(.map)',
           dest: 'production/angular'
         }, {
           expand: true,
           flatten: true,
-          cwd: 'bower_components/angular-animate/',
-          src: ['angular-animate.min.js', 'angular-animate.min.js.map'],
-          dest: 'production/angular'
-        }, {
-          expand: true,
-          flatten: true,
-          cwd: 'bower_components/angular-resource/',
-          src: ['angular-resource.min.js', 'angular-resource.min.js.map'],
-          dest: 'production/angular'
-        }, {
-          expand: true,
-          flatten: true,
-          cwd: 'bower_components/angular-route/',
-          src: ['angular-route.min.js', 'angular-route.min.js.map'],
-          dest: 'production/angular'
-        }, {
-          expand: true,
-          flatten: true,
-          cwd: 'app/templates/',
-          src: ['*.html'],
+          cwd: 'app/templates',
+          src: '**/*.html',
           dest: 'production/templates/'
-        },{
+        }, {
           expand: true,
-          flatten: true,
-          cwd: 'app/media/',
-          src: ['*'],
-          dest: 'production/media/'
+          cwd: 'bower_components',
+          src: 'material-design-icons/iconfont/!(README.md)',
+          dest: 'production/'
+        }, {
+          expand: true,
+          cwd: 'app',
+          src: 'media/**/*',
+          dest: 'production/'
         }]
       }
     },
@@ -105,6 +92,9 @@ module.exports = function(grunt) {
     // minify css files
     cssmin: {
       production: {
+        options: {
+          target: 'production'
+        },
         files: {
           'production/style.min.css': 'production/style.css'
         }
@@ -152,23 +142,23 @@ module.exports = function(grunt) {
     },
     
     // compress svg images
-    // svgmin: {
-    //   options: {
-    //     plugins: [{
-    //       removeTitle: true
-    //     }, {
-    //       removeDesc: true
-    //     }]
-    //   },
-    //   production: {
-    //     files: [{
-    //       expand: true,
-    //       flatten: true,
-    //       src: 'app/icons/*.svg',
-    //       dest: 'production/icons/'
-    //     }]
-    //   }
-    // },
+    svgmin: {
+      options: {
+        plugins: [{
+          removeTitle: true
+        }, {
+          removeDesc: true
+        }]
+      },
+      production: {
+        files: [{
+          expand: true,
+          cwd: 'production/media',
+          src: '*.svg',
+          dest: 'production/media/'
+        }]
+      }
+    },
     
     // minify scripts
     uglify: {
@@ -234,6 +224,7 @@ module.exports = function(grunt) {
     'concat:production',
     'uglify:production',
     'copy:production',
-    'clean:production'
+    'svgmin:production',
+    'clean:build'
   ]);
 };

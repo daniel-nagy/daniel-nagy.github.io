@@ -57,17 +57,18 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
   
   // Fisher–Yates shuffle
   Album.prototype.shuffle = function () {
-    for(var i = this.tracks.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = this.tracks[i];
+    var i = this.tracks.length, j, temp;
+    var current = this.tracks[this._current];
+    
+    while(i) {
+      j = Math.floor(Math.random() * (i--));
+      temp = this.tracks[i];
       
       this.tracks[i] = this.tracks[j];
       this.tracks[j] = temp;
-      
-      if(this._current === j) {
-        this._current = i;
-      }
     }
+    
+    this._current = this.tracks.indexOf(current);
   };
   
   Album.prototype.unShuffle = function () {
@@ -88,7 +89,7 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
       var itunesLookup = JSON.parse(localStorage.getItem(collectionId));
       
       if(itunesLookup) {
-        albums[collectionId] = new Album(itunesLookup.results.shift(), itunesLookup.results);
+        albums[collectionId] = new Album(itunesLookup.results.shift(), itunesLookup.results.slice(0, 12));
         defer.resolve(albums[collectionId]);
       } else {
         $http.jsonp('https://itunes.apple.com/lookup', {
@@ -100,7 +101,7 @@ angular.module('me').factory('$album', ['$http', '$q', function ($http, $q) {
           }
         }).success(function (data) {
           localStorage.setItem(collectionId, JSON.stringify(data));
-          albums[collectionId] = new Album(data.results.shift(), data.results);
+          albums[collectionId] = new Album(data.results.shift(), data.results.slice(0, 12));
           defer.resolve(albums[collectionId]);
         });
       }

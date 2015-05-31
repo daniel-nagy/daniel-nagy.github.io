@@ -1,6 +1,8 @@
-<toolbar primary class="collapse" ng-if="showToolbar">
-  <button icon src="icons/close.svg" ng-click="closeDrawer()"></button>
-  <div class="title">More Info</div>
+<toolbar class="collapse primary elevate" ng-if="showToolbar">
+  <tools>
+    <button class="icon" ng-click="closeDrawer()"><i class="material-icons">close</i></button>
+    <div class="title">More Info</div>
+  </tools>
 </toolbar>
 
 <scroll flex shrink="1">
@@ -8,21 +10,21 @@
   <list icon-list separate>
     <div class="title">Get At Me</div>
     <item separate>
-      <icon src="icons/place.svg"></icon>
+      <i class="material-icons align-middle">place</i>
       <content>
         <div>Ohio University</div>
         <div>Athens Ohio</div>
       </content>
     </item>
     <item separate>
-      <icon src="icons/phone.svg"></icon>
+      <i class="material-icons align-middle">phone</i>
       <content>
         <div>(419) 602-1585</div>
         <div>Mobile</div>
       </content>
     </item>
     <item>
-      <icon src="icons/mail.svg"></icon>
+      <i class="material-icons align-middle">mail</i>
       <content>
         <div>daniel_nagy@me.com</div>
         <div>Personal</div>
@@ -38,22 +40,22 @@
   
   <list icon-list separate>
     <div class="title">Find Me On</div>
-    <a ink-color="#B3E5FC" item separate ng-href="https://github.com/daniel-nagy" target="_blank">
-      <icon src="icons/share.svg"></icon>
+    <a ripple ink-color="#4FC3F7" item separate ng-href="https://github.com/daniel-nagy" target="_blank">
+      <i class="material-icons align-middle">share</i>
       <content>
         <div>GitHub</div>
         <div>Social Coding</div>
       </content>
     </a>
-    <a ink-color="#B3E5FC" item separate ng-href="https://www.linkedin.com/pub/daniel-nagy/aa/b00/bab" target="_blank">
-      <icon src="icons/briefcase.svg"></icon>
+    <a ripple ink-color="#4FC3F7" item separate ng-href="https://www.linkedin.com/pub/daniel-nagy/aa/b00/bab" target="_blank">
+      <i class="material-icons align-middle">work</i>
       <content>
         <div>LinkedIn</div>
         <div>Professional Networking</div>
       </content>
     </a>
-    <a ink-color="#B3E5FC" item separate ng-href="https://twitter.com/danielnagy13" target="_blank">
-      <icon src="icons/message.svg"></icon>
+    <a ripple ink-color="#4FC3F7" item separate ng-href="https://twitter.com/danielnagy13" target="_blank">
+      <i class="material-icons align-middle">chat</i>
       <content>
         <div>Twitter</div>
         <div>@danielnagy13</div>
